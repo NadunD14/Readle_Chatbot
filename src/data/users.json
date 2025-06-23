@@ -1,0 +1,36 @@
+[
+  {
+    "id": "user-1",
+    "email": "parent@m.com",
+    "password": "123",
+    "name": "Demo Parent",
+    "role": "parent",
+    "preferences": {
+      "language": "en",
+      "notifications": true
+    }
+  },
+  {
+    "id": "user-2",
+    "email": "child@m.com", 
+    "password": "123",
+    "name": "Demo Child",
+    "role": "child",
+    "preferences": {
+      "language": "en",
+      "notifications": false
+    }
+  },
+  {
+    "id": "user-3",
+    "email": "admin@readle.com",
+    "password": "123",
+    "name": "Admin User",
+    "role": "parent",
+    "preferences": {
+      "language": "en",
+      "notifications": true
+    },
+    "isAdmin": true
+  }
+]
