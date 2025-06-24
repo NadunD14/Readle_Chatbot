@@ -107,7 +107,7 @@ export default function ParentDashboard() {
               </div>
             </Link>
             
-            <Link href="#" className="block p-6 bg-gradient-to-br from-green-50 to-teal-50 rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-green-100">
+            <Link href="/account" className="block p-6 bg-gradient-to-br from-green-50 to-teal-50 rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-green-100">
               <div className="flex items-center">
                 <div className="bg-green-100 p-3 rounded-full mr-4">
                   <span className="text-2xl" role="img" aria-label="Account">⚙️</span>
