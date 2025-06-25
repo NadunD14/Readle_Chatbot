@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Calendar, Clock, X, ChevronDown, MessageSquare, Video, Phone } from 'lucide-react';
+import { Calendar, X, ChevronDown, MessageSquare, Video, Phone } from 'lucide-react';
 import { Psychologist } from '@/lib/psychologists';
 import { format } from 'date-fns';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -267,7 +267,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ psychologist, isOpen, onClose
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Child's Name
+                        Child&apos;s Name
                       </label>
                       <input
                         type="text"
@@ -281,7 +281,7 @@ const BookingForm: React.FC<BookingFormProps> = ({ psychologist, isOpen, onClose
                     
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Child's Age
+                        Child&apos;s Age
                       </label>
                       <select
                         value={childAge}

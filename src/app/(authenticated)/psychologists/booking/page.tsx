@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -153,13 +153,13 @@ export default function BookingConfirmationPage() {
                 <li className="flex items-start">
                   <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-indigo-100 text-indigo-800 text-sm font-medium mr-3 mt-0.5">1</span>
                   <div className="text-gray-700">
-                    <p>You'll receive an email confirmation with all the session details.</p>
+                    <p>You&apos;ll receive an email confirmation with all the session details.</p>
                   </div>
                 </li>
                 <li className="flex items-start">
                   <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-indigo-100 text-indigo-800 text-sm font-medium mr-3 mt-0.5">2</span>
                   <div className="text-gray-700">
-                    <p>You'll get a reminder 24 hours before your scheduled appointment.</p>
+                    <p>You&apos;ll get a reminder 24 hours before your scheduled appointment.</p>
                   </div>
                 </li>
                 <li className="flex items-start">

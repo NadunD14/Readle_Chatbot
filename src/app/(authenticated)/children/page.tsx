@@ -20,7 +20,7 @@ const CHILDREN = [
   },
   {
     id: 2,
-    name: "Noah",
+    name: "Shenaya",
     age: 7,
     avatar: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=150&h=150&fit=crop&crop=face",
     progress: 65,

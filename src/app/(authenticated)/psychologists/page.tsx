@@ -5,7 +5,7 @@ import { psychologists } from '@/lib/psychologists';
 import PsychologistCard from '@/components/psychologists/PsychologistCard';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
-import { Search, Filter, UserSearch } from 'lucide-react';
+import { Search, UserSearch } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function PsychologistsPage() {

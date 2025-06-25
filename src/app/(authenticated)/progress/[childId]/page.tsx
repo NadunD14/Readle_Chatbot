@@ -30,7 +30,7 @@ const CHILDREN_MAP: Record<string, Child> = {
   },
   "2": {
     id: 2,
-    name: "Noah",
+    name: "Shenaya",
     age: 7,
     avatar: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=150&h=150&fit=crop&crop=face",
     level: 2,

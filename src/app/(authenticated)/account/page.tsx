@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
 
 export default function AccountPage() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,14 +25,16 @@ export default function AccountPage() {
   useEffect(() => {
     if (user) {
       setFormData({
-        name: user.name || "John Doe",
+        name: "Kasun Perera",
         email: user.email || "john.doe@example.com",
         language: user.preferences?.language || "en",
-        notifications: user.preferences?.notifications || {
-          childProgress: true,
-          newActivities: true,
-          tips: true,
-        }
+        notifications: (typeof user.preferences?.notifications === 'object') 
+          ? user.preferences.notifications 
+          : {
+              childProgress: true,
+              newActivities: true,
+              tips: true,
+            }
       });
     }
   }, [user]);
@@ -89,7 +91,7 @@ export default function AccountPage() {
   }
 
   const childrenData = [
-    { id: 1, name: "Emma", initial: "E", age: 7, level: "Beginner" },
+    { id: 1, name: "Shenaya", initial: "E", age: 7, level: "Beginner" },
     { id: 2, name: "Noah", initial: "N", age: 9, level: "Intermediate" },
     { id: 3, name: "Olivia", initial: "O", age: 6, level: "Beginner" }
   ];
@@ -309,7 +311,7 @@ export default function AccountPage() {
             <div className="bg-white p-6 rounded-xl shadow-md">
               <h2 className="text-xl font-bold mb-4 text-red-600">Danger Zone</h2>
               <p className="mb-4 text-gray-700 text-sm">
-                Deleting your account will permanently remove all your data, including your children's reading progress.
+                Deleting your account will permanently remove all your data, including your children&apos;s reading progress.
               </p>
               
               {deleteConfirm ? (

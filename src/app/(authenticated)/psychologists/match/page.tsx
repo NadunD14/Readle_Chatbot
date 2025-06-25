@@ -58,7 +58,7 @@ export default function MatchPage() {
             </div>
             <div>
               <h1 className="text-2xl md:text-3xl font-bold text-indigo-800">Find a Perfect Match</h1>
-              <p className="text-indigo-600">Tell us about your child's needs, and we'll recommend the right psychologists</p>
+              <p className="text-indigo-600">Tell us about your child&apos;s needs, and we&apos;ll recommend the right psychologists</p>
             </div>
           </div>
 
@@ -76,7 +76,7 @@ export default function MatchPage() {
                 <ul className="space-y-3 text-blue-700">
                   <li className="flex items-start">
                     <span className="inline-block h-5 w-5 rounded-full bg-blue-200 text-blue-700 text-xs font-medium flex items-center justify-center mr-2 mt-0.5">1</span>
-                    We analyze your child's specific needs and challenges
+                    We analyze your child&apos;s specific needs and challenges
                   </li>
                   <li className="flex items-start">
                     <span className="inline-block h-5 w-5 rounded-full bg-blue-200 text-blue-700 text-xs font-medium flex items-center justify-center mr-2 mt-0.5">2</span>
@@ -124,7 +124,7 @@ export default function MatchPage() {
                   ) : (
                     <div className="bg-white rounded-xl shadow-sm p-6 text-center">
                       <p className="text-gray-600 mb-4">
-                        We couldn't find any psychologists matching your criteria. 
+                        We couldn&apos;t find any psychologists matching your criteria. 
                         Try adjusting your preferences or contact our support team for assistance.
                       </p>
                       <button

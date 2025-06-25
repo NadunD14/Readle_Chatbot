@@ -3,25 +3,45 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import { Star, Calendar, MessageCircle, Phone, ArrowLeft, Clock, Globe, CreditCard } from 'lucide-react';
-import { psychologists } from '@/lib/psychologists';
+import { psychologists, Psychologist } from '@/lib/psychologists';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import BookingForm from '@/components/psychologists/BookingForm';
 
-interface ProfilePageProps {
-  params: {
-    id: string;
-  };
-}
+// Updated interface to match Next.js's expected PageProps structure
+type PageProps = {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
 
-export default function PsychologistProfilePage({ params }: ProfilePageProps) {
+export default function PsychologistProfilePage({ params }: PageProps) {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const psychologist = psychologists.find(p => p.id === params.id);
   
-  if (!psychologist) {
-    notFound();
+  // Handle params being a Promise
+  const [id, setId] = useState<string | null>(null);
+  // Fix: Replace 'any' with a proper type
+  const [psychologist, setPsychologist] = useState<Psychologist | null>(null);
+  
+  // Extract id from params Promise
+  React.useEffect(() => {
+    const resolveParams = async () => {
+      try {
+        const resolvedParams = await params;
+        setId(resolvedParams.id);
+        const foundPsychologist = psychologists.find(p => p.id === resolvedParams.id);
+        setPsychologist(foundPsychologist || null);
+      } catch (error) {
+        console.error("Error resolving params:", error);
+      }
+    };
+    
+    resolveParams();
+  }, [params]);
+  
+  // Show loading state until params are resolved
+  if (!id || !psychologist) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
 
   const { name, specialties, rating, reviews, availability, languages, bio, imageUrl } = psychologist;

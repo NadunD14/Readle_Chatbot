@@ -105,7 +105,7 @@ const MatchForm: React.FC<MatchFormProps> = ({ onMatch, allPsychologists }) => {
         {/* Age Selection */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Child's Age
+            Child&apos;s Age
           </label>
           <div className="relative">
             <select 

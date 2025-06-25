@@ -13,7 +13,7 @@ const DASHBOARD_STATS = {
 };
 
 export default function ParentDashboard() {
-  const userName = "John"; // This should come from your user context or state
+  const userName = "Kasun"; // This should come from your user context or state
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] py-8 px-6">
@@ -128,7 +128,7 @@ export default function ParentDashboard() {
           <div className="space-y-4">
             {[
               { child: "Emma", activity: "Completed 'Beginning Sounds'", time: "2 hours ago", icon: "📚" },
-              { child: "Noah", activity: "Started 'CVC Words'", time: "Yesterday", icon: "✍️" },
+              { child: "Shenaya", activity: "Started 'CVC Words'", time: "Yesterday", icon: "✍️" },
               { child: "Olivia", activity: "Took reading assessment", time: "2 days ago", icon: "📝" }
             ].map((item, index) => (
               <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
