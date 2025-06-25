@@ -44,8 +44,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           <Link href="/children" className="text-gray-700 font-medium hover:text-indigo-600 transition-colors">
             My Children
           </Link>
-          <Link href="/resources" className="text-gray-700 font-medium hover:text-indigo-600 transition-colors">
-            Resources
+          <Link href="/psychologists" className="text-gray-700 font-medium hover:text-indigo-600 transition-colors">
+            Psychologists
           </Link>
         </nav>
 
@@ -95,7 +95,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             {isProfileOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-20">
                 <Link 
-                  href="/profile" 
+                  href="/account" 
                   className="block px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
                   onClick={() => setIsProfileOpen(false)}
                 >
@@ -198,7 +198,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             </Link>
             <div className="pt-2 border-t border-gray-100 flex flex-col space-y-3">
               <Link 
-                href="/profile" 
+                href="/account" 
                 className="text-gray-700 font-medium hover:text-indigo-600 transition-colors py-2 px-3 rounded-lg hover:bg-gray-50"
                 onClick={() => setIsMenuOpen(false)}
               >

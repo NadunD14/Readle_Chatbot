@@ -13,7 +13,7 @@ const DASHBOARD_STATS = {
 };
 
 export default function ParentDashboard() {
-  const userName = "John"; // This should come from your user context or state
+  const userName = "Kasun"; // This should come from your user context or state
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] py-8 px-6">
@@ -107,7 +107,7 @@ export default function ParentDashboard() {
               </div>
             </Link>
             
-            <Link href="#" className="block p-6 bg-gradient-to-br from-green-50 to-teal-50 rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-green-100">
+            <Link href="/account" className="block p-6 bg-gradient-to-br from-green-50 to-teal-50 rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-green-100">
               <div className="flex items-center">
                 <div className="bg-green-100 p-3 rounded-full mr-4">
                   <span className="text-2xl" role="img" aria-label="Account">⚙️</span>
@@ -128,7 +128,7 @@ export default function ParentDashboard() {
           <div className="space-y-4">
             {[
               { child: "Emma", activity: "Completed 'Beginning Sounds'", time: "2 hours ago", icon: "📚" },
-              { child: "Noah", activity: "Started 'CVC Words'", time: "Yesterday", icon: "✍️" },
+              { child: "Shenaya", activity: "Started 'CVC Words'", time: "Yesterday", icon: "✍️" },
               { child: "Olivia", activity: "Took reading assessment", time: "2 days ago", icon: "📝" }
             ].map((item, index) => (
               <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">

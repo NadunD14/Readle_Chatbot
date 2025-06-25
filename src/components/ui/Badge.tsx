@@ -3,9 +3,13 @@ import { motion } from 'framer-motion';
 
 interface BadgeProps {
   text: string;
-  type: 'achievement' | 'level' | 'reward';
+  type?: 'achievement' | 'level' | 'reward';
   size?: 'small' | 'medium' | 'large';
   withAnimation?: boolean;
+  icon?: string;
+  category?: string;
+  title?: string;
+  className?: string;
 }
 
 const getTypeStyles = (type: BadgeProps['type']) => {
@@ -33,18 +37,36 @@ const getSizeStyles = (size: BadgeProps['size']) => {
 };
 
 const Badge: React.FC<BadgeProps> = ({ 
-  text, 
-  type = 'achievement', 
+  text,
+  type = 'achievement',
   size = 'medium',
-  withAnimation = false
+  withAnimation = false,
+  icon,
+  category,
+  title,
+  className = ''
 }) => {
   const baseStyles = "rounded-full font-bold shadow-md inline-flex items-center justify-center";
   const typeStyles = getTypeStyles(type);
   const sizeStyles = getSizeStyles(size);
   
-  const badge = (
-    <div className={`${baseStyles} ${typeStyles} ${sizeStyles}`}>
-      {text}
+  // Use title or text as display text
+  const displayText = title || text;
+  // Use icon from prop or extract emoji from beginning of text if present
+  const displayIcon = icon || (text.match(/^\p{Emoji}/u) ? text.match(/^\p{Emoji}/u)![0] : '');
+  const textWithoutEmoji = displayIcon ? text.replace(/^\p{Emoji}/u, '').trim() : text;
+  
+  const badgeContent = (
+    <div className={`${baseStyles} ${typeStyles} ${sizeStyles} ${className}`}>
+      {displayIcon && <span className="mr-1">{displayIcon}</span>}
+      <span>{displayIcon ? textWithoutEmoji : displayText}</span>
+      
+      {/* Optional category indicator */}
+      {category && (
+        <span className="ml-1 bg-white bg-opacity-20 text-xs px-1.5 py-0.5 rounded-full">
+          {category}
+        </span>
+      )}
     </div>
   );
   
@@ -58,13 +80,22 @@ const Badge: React.FC<BadgeProps> = ({
           stiffness: 260,
           damping: 20
         }}
+        whileHover={{ scale: 1.05 }}
+        className="inline-block"
       >
-        {badge}
+        {badgeContent}
       </motion.div>
     );
   }
   
-  return badge;
+  return (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      className="inline-block"
+    >
+      {badgeContent}
+    </motion.div>
+  );
 };
 
 export default Badge;

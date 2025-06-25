@@ -117,20 +117,41 @@ export default function FeaturesPage() {
               </div>
             </div>
 
-            {/* Feature 5: Localized Language Support */}
-            <div className="bg-gradient-to-br from-pink-50 to-red-50 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-full md:col-span-2 lg:col-span-1">
+            {/* Feature 5: Psychologist Connection */}
+            <div className="bg-gradient-to-br from-pink-50 to-red-50 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-full">
               <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold mb-3 text-gray-800">Localized Language Support</h3>
+              <h3 className="text-2xl font-bold mb-3 text-gray-800">Psychologist Connection</h3>
               <p className="text-gray-600 mb-6 flex-grow">
-                Our platform supports multiple languages and adapts to the unique phonological features of each. This ensures that children receive appropriate guidance for their specific language needs.
+                Connect with licensed child psychologists who specialize in dyslexia and learning differences. Get professional guidance, personalized strategies, and ongoing support for your child&apos;s unique needs.
               </p>
               <div className="mt-auto">
-                <Link href="/languages" className="inline-flex items-center px-6 py-3 bg-pink-600 text-white font-medium rounded-xl hover:bg-pink-700 transition-colors duration-300">
-                  Language Options
+                <Link href="/psychologists" className="inline-flex items-center px-6 py-3 bg-pink-600 text-white font-medium rounded-xl hover:bg-pink-700 transition-colors duration-300">
+                  Find Specialists
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Feature 6: Text-to-Speech */}
+            <div className="bg-gradient-to-br from-indigo-50 to-cyan-50 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M9.172 12l3.5-3.5M7 21l3.5-3.5M3 3l3.5 3.5M21 3l-3.5 3.5M16 12l-3.5 3.5" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-gray-800">Text-to-Speech System</h3>
+              <p className="text-gray-600 mb-6 flex-grow">
+                Advanced text-to-speech functionality built into every learning activity. Children can hear proper pronunciation, follow along with highlighted text, and develop better reading comprehension through multi-sensory learning.
+              </p>
+              <div className="mt-auto">
+                <Link href="/text-to-speech" className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors duration-300">
+                  Try Audio Features
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

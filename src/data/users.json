@@ -3,7 +3,7 @@
     "id": "user-1",
     "email": "parent@m.com",
     "password": "123",
-    "name": "Demo Parent",
+    "name": "Kasun Perera",
     "role": "parent",
     "preferences": {
       "language": "en",
@@ -14,7 +14,7 @@
     "id": "user-2",
     "email": "child@m.com", 
     "password": "123",
-    "name": "Demo Child",
+    "name": "Shenaya Perera",
     "role": "child",
     "preferences": {
       "language": "en",

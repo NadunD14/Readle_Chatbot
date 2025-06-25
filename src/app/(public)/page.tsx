@@ -260,7 +260,7 @@ export default function LandingPage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 md:px-12 lg:px-24 scroll-mt-16">
+      {/* <section id="contact" className="py-20 px-6 md:px-12 lg:px-24 scroll-mt-16">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-sm font-medium bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full">GET IN TOUCH</span>
@@ -292,7 +292,7 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-20 px-6 md:px-12 lg:px-24 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-t-[3rem]">

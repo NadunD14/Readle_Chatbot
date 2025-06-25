@@ -2,339 +2,238 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useParams, useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import Badge from '@/components/ui/Badge';
-import { getActivityById, Activity } from '@/lib/constants';
-import confetti from 'canvas-confetti';
+import AudioButton from '@/components/ui/AudioButton';
+import { useTTS } from '@/hooks/useTTS';
+import { childActivities, Activity } from '@/lib/childActivities';
+import Image from 'next/image';
 
-interface Question {
-  question: string;
-  options: string[];
-  correctAnswer: string;
-}
-
-export default function ActivityPage() {
+export default function ActivityDetailPage() {
   const params = useParams();
-  const id = typeof params.id === 'string' ? params.id : '';
-  
+  const router = useRouter();
+  const { speakWithHighlight } = useTTS();
   const [activity, setActivity] = useState<Activity | null>(null);
   const [loading, setLoading] = useState(true);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean | null>(null);
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [score, setScore] = useState(0);
+  const [readDescription, setReadDescription] = useState(false);
 
+  const id = typeof params.id === 'string' ? params.id : '';
+  
   // Fetch activity data
   useEffect(() => {
     if (id) {
-      const activityData = getActivityById(id);
+      const activityData = childActivities.find(act => act.id === id);
       setActivity(activityData || null);
       setLoading(false);
     }
   }, [id]);
 
-  // Trigger confetti when activity is completed
+  // Auto-read description when page first loads
   useEffect(() => {
-    if (isCompleted) {
-      // Trigger confetti
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+    if (activity && !readDescription) {
+      setTimeout(() => {
+        speakWithHighlight(activity.description, 'activity-description');
+        setReadDescription(true);
+      }, 1000);
     }
-  }, [isCompleted]);
+  }, [activity, readDescription, speakWithHighlight]);
 
+  // Show loading state
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] flex items-center justify-center">
-        <div className="text-2xl font-bold text-indigo-600">Loading...</div>
+        <div className="flex flex-col items-center">
+          <div className="w-16 h-16 border-4 border-indigo-400 border-t-indigo-200 rounded-full animate-spin"></div>
+          <p className="mt-4 text-xl font-medium text-indigo-700">Loading activity...</p>
+        </div>
       </div>
     );
   }
 
+  // Show not found state
   if (!activity) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] flex items-center justify-center p-6">
         <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 text-center">
-          <h1 className="text-2xl font-bold text-red-500 mb-4">Activity Not Found</h1>
-          <p className="mb-6">Sorry, this activity doesn&apos;t exist.</p>
-          <Link 
-            href="/activities" 
-            className="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors"
+          <motion.div 
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="mb-6 text-5xl"
           >
-            Back to Activities
+            😢
+          </motion.div>
+          <h1 className="text-2xl font-bold text-red-500 mb-4">Activity Not Found</h1>
+          <p className="mb-6 text-gray-600">We couldn&apos;t find the activity you&apos;re looking for.</p>
+          <Link 
+            href="/dashboard" 
+            className="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors inline-block"
+          >
+            Back to Dashboard
           </Link>
         </div>
       </div>
     );
   }
 
-  const currentQuestion: Question | undefined = 
-    activity.questions && activity.questions[currentQuestionIndex];
-
-  const handleAnswerSelect = (answer: string) => {
-    if (selectedAnswer || isCompleted) return;
-    
-    setSelectedAnswer(answer);
-    const correct = answer === currentQuestion?.correctAnswer;
-    setIsAnswerCorrect(correct);
-    
-    if (correct) {
-      setScore(prevScore => prevScore + 1);
+  // Get difficulty label
+  const getDifficultyLabel = (difficulty: string) => {
+    switch (difficulty) {
+      case 'beginner':
+        return { text: 'Easy', color: 'bg-green-100 text-green-800' };
+      case 'intermediate':
+        return { text: 'Medium', color: 'bg-yellow-100 text-yellow-800' };
+      case 'advanced':
+        return { text: 'Hard', color: 'bg-red-100 text-red-800' };
+      default:
+        return { text: 'Unknown', color: 'bg-gray-100 text-gray-800' };
     }
+  };
+  
+  const difficultyInfo = getDifficultyLabel(activity.difficulty);
 
-    // Move to next question or complete activity after delay
-    setTimeout(() => {
-      if (!activity.questions || currentQuestionIndex >= activity.questions.length - 1) {
-        // Activity completed
-        setIsCompleted(true);
-      } else {
-        // Next question
-        setCurrentQuestionIndex(prev => prev + 1);
-        setSelectedAnswer(null);
-        setIsAnswerCorrect(null);
-      }
-    }, 1500);
+  // Get type icon
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case 'phonics': return '🔤';
+      case 'spelling': return '✏️';
+      case 'reading': return '📚';
+      case 'comprehension': return '🧩';
+      default: return '📝';
+    }
   };
 
-  // Completion screen
-  if (isCompleted) {
-    // Calculate stars based on score percentage
-    const totalQuestions = activity.questions?.length || 1;
-    const scorePercentage = (score / totalQuestions) * 100;
-    const stars = scorePercentage >= 80 ? 3 : scorePercentage >= 60 ? 2 : 1;
-    
-    const badgeText = stars === 3 
-      ? `⭐⭐⭐ Amazing!` 
-      : stars === 2 
-        ? `⭐⭐ Great Job!` 
-        : `⭐ Good Try!`;
-    
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] flex items-center justify-center p-6">
-        <motion.div 
-          className="bg-white rounded-2xl shadow-xl max-w-2xl w-full p-8 text-center"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-10 px-6 -mx-8 -mt-8 rounded-t-2xl mb-8">
-            <h1 className="text-4xl font-bold mb-4">Well Done!</h1>
-            <p className="text-xl">You completed the {activity.title} activity!</p>
-          </div>
-          
-          <div className="mb-10">
-            <div className="mb-6">
-              <Badge text={badgeText} type="reward" size="large" withAnimation />
-            </div>
-            
-            <p className="text-gray-700 text-lg mb-2">
-              You scored {score} out of {activity.questions?.length || 0}
-            </p>
-            
-            <div className="flex justify-center">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="mx-2">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: i < stars ? 1 : 0.6 }}
-                    transition={{ delay: i * 0.3, type: "spring" }}
-                    className={`text-4xl ${i < stars ? 'text-yellow-400' : 'text-gray-300'}`}
-                  >
-                    ⭐
-                  </motion.div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Navigation buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/child-dashboard"
-              className="px-6 py-3 bg-white border-2 border-indigo-200 text-indigo-600 rounded-xl hover:bg-indigo-50 transition-colors"
-            >
-              Return to Dashboard
-            </Link>
-            
-            {/* Find the next activity ID if it exists */}
-            {(() => {
-              const activityIds = activity.questions?.map((_, i) => i) || [];
-              const currentIndex = activityIds.indexOf(Number(id));
-              const nextActivityId = currentIndex < activityIds.length - 1 
-                ? activityIds[currentIndex + 1]
-                : null;
-                
-              if (nextActivityId !== null) {
-                return (
-                  <Link
-                    href={`/activities/${nextActivityId}`}
-                    className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-500 text-white rounded-xl hover:shadow-lg transition-all"
-                  >
-                    Next Activity
-                  </Link>
-                );
-              }
-              return null;
-            })()}
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
-  // Question screen
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] py-8 px-6">
-      <div className="max-w-3xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-md p-8 mb-6">
-          {/* Activity Header */}
-          <div className="mb-8">
-            <div className="flex justify-between items-start mb-4">
-              <h1 className="text-2xl font-bold text-gray-800">{activity.title}</h1>
-              <Badge 
-                text={activity.type.charAt(0).toUpperCase() + activity.type.slice(1)}
-                type={
-                  activity.type === 'phonics' ? 'level' :
-                  activity.type === 'spelling' ? 'achievement' :
-                  'reward'
-                }
-                size="small"
+      <motion.div 
+        className="max-w-4xl mx-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {/* Back button */}
+        <div className="mb-6">
+          <button 
+            onClick={() => router.back()}
+            className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors font-medium"
+          >
+            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+          </button>
+        </div>
+
+        {/* Activity card */}
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          {/* Activity header with image */}
+          {activity.thumbnailUrl && (
+            <div className="h-48 md:h-64 w-full relative">
+              <Image 
+                src={activity.thumbnailUrl} 
+                alt={activity.title}
+                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
-            </div>
-            
-            <p className="text-gray-600">{activity.description}</p>
-            
-            {/* Progress indicator */}
-            <div className="mt-4 flex items-center">
-              <div className="flex-1 bg-gray-200 h-2 rounded-full overflow-hidden">
-                <div 
-                  className="bg-indigo-500 h-full"
-                  style={{ width: `${((currentQuestionIndex + 1) / (activity.questions?.length || 1)) * 100}%` }}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 p-6">
+                <Badge 
+                  text={activity.type} 
+                  icon={getTypeIcon(activity.type)}
+                  type="achievement" 
+                  size="small"
                 />
               </div>
-              <span className="ml-3 text-sm text-indigo-700 font-medium">
-                {currentQuestionIndex + 1}/{activity.questions?.length || 0}
+            </div>
+          )}
+
+          {/* Activity content */}
+          <div className="p-8">
+            <div className="flex justify-between items-start mb-4">
+              <h1 className="text-3xl font-bold text-gray-800">{activity.title}</h1>
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${difficultyInfo.color}`}>
+                {difficultyInfo.text}
               </span>
             </div>
-          </div>
-          
-          {/* Question */}
-          {currentQuestion ? (
-            <div>
-              <h2 className="text-xl font-medium text-gray-700 mb-6">{currentQuestion.question}</h2>
-              
-              {/* Answer options */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <AnimatePresence>
-                  {currentQuestion.options.map((option, index) => {
-                    const isSelected = selectedAnswer === option;
-                    const isCorrect = isSelected && option === currentQuestion.correctAnswer;
-                    const isWrong = isSelected && option !== currentQuestion.correctAnswer;
-                    
-                    return (
-                      <motion.button
-                        key={option}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        onClick={() => handleAnswerSelect(option)}
-                        disabled={selectedAnswer !== null}
-                        className={`p-4 rounded-xl border-2 text-left transition-all ${
-                          isCorrect 
-                            ? 'border-green-500 bg-green-50 text-green-700' 
-                            : isWrong
-                              ? 'border-red-500 bg-red-50 text-red-700'
-                              : isSelected
-                                ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                                : 'border-gray-200 hover:border-indigo-200 hover:bg-indigo-50'
-                        }`}
-                      >
-                        <div className="flex items-center">
-                          <div className={`w-6 h-6 rounded-full mr-3 flex items-center justify-center ${
-                            isCorrect 
-                              ? 'bg-green-500 text-white' 
-                              : isWrong
-                                ? 'bg-red-500 text-white'
-                                : 'bg-gray-100'
-                          }`}>
-                            {isCorrect ? (
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                              </svg>
-                            ) : isWrong ? (
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                              </svg>
-                            ) : (
-                              <span>{String.fromCharCode(65 + index)}</span>
-                            )}
-                          </div>
-                          <span>{option}</span>
-                        </div>
-                      </motion.button>
-                    );
-                  })}
-                </AnimatePresence>
+
+            <div className="mb-8 relative">
+              <div className="flex items-center mb-2">
+                <h2 className="text-xl font-semibold text-gray-700">About This Activity</h2>
+                <AudioButton 
+                  text={activity.description}
+                  size="small"
+                  variant="ghost"
+                  className="ml-2"
+                />
+              </div>
+              <p 
+                id="activity-description" 
+                className="text-gray-600 leading-relaxed transition-all"
+              >
+                {activity.description}
+              </p>
+            </div>
+
+            {/* Activity info */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="bg-indigo-50 p-4 rounded-xl">
+                <p className="text-sm text-indigo-700 font-medium">Type</p>
+                <p className="text-lg text-gray-800 capitalize">{activity.type}</p>
               </div>
               
-              {/* Feedback message */}
-              <AnimatePresence>
-                {isAnswerCorrect !== null && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className={`mt-6 p-4 rounded-xl ${
-                      isAnswerCorrect 
-                        ? 'bg-green-50 border border-green-200' 
-                        : 'bg-red-50 border border-red-200'
-                    }`}
-                  >
-                    <p className={`font-medium ${isAnswerCorrect ? 'text-green-700' : 'text-red-700'}`}>
-                      {isAnswerCorrect 
-                        ? 'Great job! That\'s correct!' 
-                        : `Oops! The correct answer is: ${currentQuestion.correctAnswer}`}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div className="bg-purple-50 p-4 rounded-xl">
+                <p className="text-sm text-purple-700 font-medium">Duration</p>
+                <p className="text-lg text-gray-800">
+                  {activity.durationMinutes || 15} minutes
+                </p>
+              </div>
             </div>
-          ) : (
-            <p className="text-center text-gray-600">No questions available for this activity.</p>
-          )}
-        </div>
-        
-        {/* Navigation buttons */}
-        <div className="flex justify-between">
-          <Link 
-            href="/child-dashboard"
-            className="px-4 py-2 text-indigo-600 hover:text-indigo-800 transition-colors"
-          >
-            ← Back to Dashboard
-          </Link>
-          
-          {/* Skip button (only visible when answer not selected) */}
-          {selectedAnswer === null && currentQuestion && (
-            <button 
-              onClick={() => {
-                if (currentQuestionIndex >= (activity.questions?.length || 0) - 1) {
-                  setIsCompleted(true);
-                } else {
-                  setCurrentQuestionIndex(prev => prev + 1);
-                }
-              }}
-              className="px-4 py-2 text-indigo-600 hover:text-indigo-800 transition-colors"
+
+            {/* Start button */}
+            <Link
+              href={`/activities/${activity.id}/play`}
+              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-xl flex items-center justify-center hover:shadow-lg transition-all"
             >
-              Skip →
-            </button>
-          )}
+              <span>Start Activity</span>
+              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
-      </div>
+
+        {/* Related activities */}
+        <div className="mt-10">
+          <h2 className="text-xl font-bold text-gray-800 mb-4">You Might Also Like</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {childActivities
+              .filter(a => a.id !== activity.id && a.type === activity.type)
+              .slice(0, 3)
+              .map(relatedActivity => (
+                <motion.div 
+                  key={relatedActivity.id}
+                  whileHover={{ y: -5 }}
+                >
+                  <Link 
+                    href={`/activities/${relatedActivity.id}`}
+                    className="block bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-all"
+                  >
+                    <h3 className="font-bold text-gray-800 mb-1">{relatedActivity.title}</h3>
+                    <p className="text-sm text-gray-600 mb-2 line-clamp-2">{relatedActivity.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className={`px-2 py-1 rounded-full text-xs ${difficultyInfo.color}`}>
+                        {relatedActivity.difficulty}
+                      </span>
+                      <span className="text-indigo-600">View →</span>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
