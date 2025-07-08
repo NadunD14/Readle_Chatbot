@@ -19,7 +19,7 @@ export default function AboutPage() {
               <span className="text-4xl">✨</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-500">
-              About Readle
+              About Readlle
             </h1>
             <p className="text-lg mb-8 text-gray-700 leading-relaxed max-w-3xl mx-auto">
               We&apos;re on a mission to transform reading experiences for children with dyslexia through 
@@ -40,7 +40,7 @@ export default function AboutPage() {
               
               <div className="space-y-6 text-gray-700">
                 <p className="text-lg">
-                  Readle began with a simple observation: traditional learning methods often leave children with dyslexia behind. Founded in 2020 by a team of educators, cognitive scientists, and parents of dyslexic children, we set out to create something different.
+                  Readlle began with a simple observation: traditional learning methods often leave children with dyslexia behind. Founded in 2020 by a team of educators, cognitive scientists, and parents of dyslexic children, we set out to create something different.
                 </p>
                 
                 <p className="text-lg">
@@ -80,7 +80,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <span className="text-sm font-medium bg-green-100 text-green-700 px-4 py-1.5 rounded-full">OUR PEOPLE</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">Meet The Team</h2>
-            <p className="text-gray-600 max-w-xl mx-auto">The passionate individuals behind Readle&apos;s mission</p>
+            <p className="text-gray-600 max-w-xl mx-auto">The passionate individuals behind Readlle&apos;s mission</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -253,7 +253,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-12">
             <span className="text-sm font-medium bg-pink-100 text-pink-700 px-4 py-1.5 rounded-full inline-block">JOIN US</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Get Involved with Readle</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Get Involved with Readlle</h2>
             <p className="text-gray-700 text-lg max-w-xl mx-auto">
               Be a part of our mission to make a difference in the lives of children with dyslexia. There are many ways to get involved:
             </p>
@@ -309,7 +309,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Spread the Word</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                Help us raise awareness about dyslexia and the innovative solutions Readle offers.
+                Help us raise awareness about dyslexia and the innovative solutions Readlle offers.
               </p>
               <Link href="/resources" className="inline-block bg-red-600 text-white font-semibold py-2 px-4 rounded-full shadow-md hover:bg-red-700 transition-all duration-300">
                 Access Resources to Share
@@ -320,11 +320,11 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 md:px-12 lg:px-24 bg-white rounded-t-[3rem]">
+      {/* <footer className="py-8 px-6 md:px-12 lg:px-24 bg-white rounded-t-[3rem]">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-6">
             <div className="text-gray-600 text-sm">
-              &copy; 2023 Readle. All rights reserved.
+              &copy; 2023 Readlle. All rights reserved.
             </div>
             <div className="flex gap-4">
               <Link href="/privacy" className="text-gray-600 text-sm hover:text-indigo-600 transition-all duration-300">Privacy Policy</Link>
@@ -333,10 +333,10 @@ export default function AboutPage() {
           </div>
           
           <div className="text-gray-500 text-xs">
-            Made with ❤️ by the Readle Team
+            Made with ❤️ by the Readlle Team
           </div>
         </div>
-      </footer>
+      </footer> */}
     </main>
   );
 }

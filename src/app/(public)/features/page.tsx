@@ -21,7 +21,7 @@ export default function FeaturesPage() {
               Powerful Features
             </h1>
             <p className="text-lg mb-8 text-gray-700 leading-relaxed max-w-3xl mx-auto">
-              Discover the tools and technologies that make Readle the leading platform for 
+              Discover the tools and technologies that make Readlle the leading platform for 
               children with dyslexia to develop their reading skills with confidence.
             </p>
           </motion.div>
@@ -44,7 +44,7 @@ export default function FeaturesPage() {
                 Our science-backed assessment helps identify dyslexia indicators and creates a baseline for your child&apos;s personalized learning plan. The quiz takes only 15 minutes and provides immediate insights.
               </p>
               <div className="mt-auto">
-                <Link href="/quiz" className="inline-flex items-center px-6 py-3 bg-purple-600 text-white font-medium rounded-xl hover:bg-purple-700 transition-colors duration-300">
+                <Link href="/login" className="inline-flex items-center px-6 py-3 bg-purple-600 text-white font-medium rounded-xl hover:bg-purple-700 transition-colors duration-300">
                   Take the Quiz
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -66,7 +66,7 @@ export default function FeaturesPage() {
                 Engaging games and exercises tailored to your child&apos;s specific needs. Our adaptive learning system adjusts difficulty and focus areas based on your child&apos;s progress to maintain the perfect learning challenge.
               </p>
               <div className="mt-auto">
-                <Link href="/activities" className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors duration-300">
+                <Link href="/login" className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors duration-300">
                   Explore Activities
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -87,7 +87,7 @@ export default function FeaturesPage() {
                 Monitor your child&apos;s development with detailed insights and visual reports. Celebrate achievements with milestone markers and watch as reading confidence grows through data-backed evidence.
               </p>
               <div className="mt-auto">
-                <Link href="/dashboard" className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 transition-colors duration-300">
+                <Link href="/login" className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 transition-colors duration-300">
                   View Dashboard
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -108,7 +108,7 @@ export default function FeaturesPage() {
                 Access a wealth of resources designed to help parents support their children with dyslexia. Learn strategies for at-home practice, understand dyslexia better, and become your child&apos;s best advocate.
               </p>
               <div className="mt-auto">
-                <Link href="/resources" className="inline-flex items-center px-6 py-3 bg-orange-600 text-white font-medium rounded-xl hover:bg-orange-700 transition-colors duration-300">
+                <Link href="/login" className="inline-flex items-center px-6 py-3 bg-orange-600 text-white font-medium rounded-xl hover:bg-orange-700 transition-colors duration-300">
                   Get Resources
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -129,7 +129,7 @@ export default function FeaturesPage() {
                 Connect with licensed child psychologists who specialize in dyslexia and learning differences. Get professional guidance, personalized strategies, and ongoing support for your child&apos;s unique needs.
               </p>
               <div className="mt-auto">
-                <Link href="/psychologists" className="inline-flex items-center px-6 py-3 bg-pink-600 text-white font-medium rounded-xl hover:bg-pink-700 transition-colors duration-300">
+                <Link href="/login" className="inline-flex items-center px-6 py-3 bg-pink-600 text-white font-medium rounded-xl hover:bg-pink-700 transition-colors duration-300">
                   Find Specialists
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -150,7 +150,7 @@ export default function FeaturesPage() {
                 Advanced text-to-speech functionality built into every learning activity. Children can hear proper pronunciation, follow along with highlighted text, and develop better reading comprehension through multi-sensory learning.
               </p>
               <div className="mt-auto">
-                <Link href="/text-to-speech" className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors duration-300">
+                <Link href="/login" className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors duration-300">
                   Try Audio Features
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -167,7 +167,7 @@ export default function FeaturesPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-sm font-medium bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full">COMPARE</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">Why Readle Stands Out</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">Why Readlle Stands Out</h2>
             <p className="text-gray-600 max-w-xl mx-auto">See how our features compare to traditional reading approaches</p>
           </div>
           
@@ -176,7 +176,7 @@ export default function FeaturesPage() {
               <thead>
                 <tr className="bg-indigo-50">
                   <th className="px-6 py-4 text-left text-gray-800 font-bold">Feature</th>
-                  <th className="px-6 py-4 text-center text-indigo-700 font-bold">Readle</th>
+                  <th className="px-6 py-4 text-center text-indigo-700 font-bold">Readlle</th>
                   <th className="px-6 py-4 text-center text-gray-800 font-bold">Traditional Approaches</th>
                 </tr>
               </thead>
@@ -256,11 +256,11 @@ export default function FeaturesPage() {
             Start your child&apos;s journey to confident reading today with our specialized tools.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link href="/sign-up" className="px-10 py-4 bg-white text-indigo-700 font-medium rounded-xl hover:bg-indigo-50 transition-all duration-300 text-center shadow-lg">
+            <Link href="/signup" className="px-10 py-4 bg-white text-indigo-700 font-medium rounded-xl hover:bg-indigo-50 transition-all duration-300 text-center shadow-lg">
               Get Started Free
             </Link>
-            <Link href="/demo" className="px-10 py-4 bg-transparent border-2 border-white text-white font-medium rounded-xl hover:bg-white/10 transition-all duration-300 text-center">
-              Request Demo
+            <Link href="/contact" className="px-10 py-4 bg-transparent border-2 border-white text-white font-medium rounded-xl hover:bg-white/10 transition-all duration-300 text-center">
+              Contact Us
             </Link>
           </div>
           <p className="mt-6 text-indigo-200 text-sm">No credit card required. Start with our free plan today.</p>

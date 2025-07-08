@@ -28,11 +28,11 @@ export default function LandingPage() {
                 designed specifically for their unique learning needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/learn-more" className="group px-8 py-3 border-2 border-indigo-200 bg-white hover:border-indigo-300 transition-all duration-300 text-center rounded-xl flex items-center justify-center gap-2">
+                <Link href="/features" className="group px-8 py-3 border-2 border-indigo-200 bg-white hover:border-indigo-300 transition-all duration-300 text-center rounded-xl flex items-center justify-center gap-2">
                   <span>Learn More</span>
                   <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
                 </Link>
-                <Link href="/sign-up" className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-500 text-white font-medium rounded-xl hover:shadow-lg hover:shadow-indigo-200 transition-all duration-300 text-center">
+                <Link href="/signup" className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-500 text-white font-medium rounded-xl hover:shadow-lg hover:shadow-indigo-200 transition-all duration-300 text-center">
                   Get Started
                 </Link>
               </div>
@@ -55,7 +55,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-sm font-medium bg-green-100 text-green-700 px-4 py-1.5 rounded-full">FEATURES</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">How Readle Helps Your Child</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">How Readlle Helps Your Child</h2>
             <p className="text-gray-600 max-w-xl mx-auto">Tools designed with dyslexic readers in mind</p>
           </div>
           
@@ -108,7 +108,7 @@ export default function LandingPage() {
           <div className="text-center mb-12">
             <span className="text-sm font-medium bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full">JOURNEY</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">How It Works</h2>
-            <p className="text-gray-600 max-w-xl mx-auto">Follow these simple steps to get started with Readle</p>
+            <p className="text-gray-600 max-w-xl mx-auto">Follow these simple steps to get started with Readlle</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -118,7 +118,7 @@ export default function LandingPage() {
               </div>
               <div>
                 <h3 className="font-bold text-xl mb-2">Create Account</h3>
-                <p className="text-gray-600">Join Readle and set up your profile to begin your child&apos;s reading journey.</p>
+                <p className="text-gray-600">Join Readlle and set up your profile to begin your child&apos;s reading journey.</p>
               </div>
             </div>
             
@@ -190,7 +190,7 @@ export default function LandingPage() {
           <div className="text-center mb-12">
             <span className="text-sm font-medium bg-yellow-100 text-yellow-700 px-4 py-1.5 rounded-full">SUCCESS STORIES</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">What Parents Are Saying</h2>
-            <p className="text-gray-600 max-w-xl mx-auto">Real experiences from families using Readle</p>
+            <p className="text-gray-600 max-w-xl mx-auto">Real experiences from families using Readlle</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -206,7 +206,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <p className="text-gray-700 text-lg italic">
-                &ldquo;Before Readle, my son avoided reading at all costs. Now he actively asks to practice! The games make learning fun, and I&rsquo;ve seen remarkable progress in just a few months.&rdquo;
+                &ldquo;Before Readlle, my son avoided reading at all costs. Now he actively asks to practice! The games make learning fun, and I&rsquo;ve seen remarkable progress in just a few months.&rdquo;
               </p>
             </div>
             
@@ -270,7 +270,7 @@ export default function LandingPage() {
           
           <div className="bg-gradient-to-br from-white to-indigo-50 p-10 shadow-lg rounded-2xl max-w-3xl mx-auto">
             <p className="text-center mb-10 text-lg text-gray-700">
-              Have questions about how Readle can help your child? Our team is here to support you every step of the way.
+              Have questions about how Readlle can help your child? Our team is here to support you every step of the way.
             </p>
             <div className="flex flex-col gap-6">
               <div className="flex items-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
@@ -279,7 +279,7 @@ export default function LandingPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                   </svg>
                 </div>
-                <span className="text-lg">support@readle.com</span>
+                <span className="text-lg">support@Readlle.com</span>
               </div>
               <div className="flex items-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
                 <div className="bg-indigo-100 p-3 rounded-full mr-4">
@@ -287,7 +287,7 @@ export default function LandingPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                   </svg>
                 </div>
-                <span className="text-lg">1-800-READLE-1</span>
+                <span className="text-lg">1-800-Readlle-1</span>
               </div>
             </div>
           </div>
@@ -299,10 +299,10 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Child&rsquo;s Reading Experience?</h2>
           <p className="text-xl mb-10 text-indigo-100 max-w-2xl mx-auto">
-            Join thousands of families who&rsquo;ve discovered the joy of reading with Readle.
+            Join thousands of families who&rsquo;ve discovered the joy of reading with Readlle.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link href="/sign-up" className="px-10 py-4 bg-white text-indigo-700 font-medium rounded-xl hover:bg-indigo-50 transition-all duration-300 text-center shadow-lg">
+            <Link href="/signup" className="px-10 py-4 bg-white text-indigo-700 font-medium rounded-xl hover:bg-indigo-50 transition-all duration-300 text-center shadow-lg">
               Sign Up Free
             </Link>
             <Link href="/learn-more" className="px-10 py-4 bg-transparent border-2 border-white text-white font-medium rounded-xl hover:bg-white/10 transition-all duration-300 text-center">

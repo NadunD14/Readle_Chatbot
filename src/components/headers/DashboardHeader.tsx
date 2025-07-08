@@ -32,8 +32,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center">
-          <Image src="/images/logo.png" alt="Readle Logo" width={36} height={36} />
-          <span className="ml-2 text-xl font-bold text-indigo-600">Readle</span>
+          <Image src="/images/logo.png" alt="Readlle Logo" width={36} height={36} />
+          <span className="ml-2 text-xl font-bold text-indigo-600">Readlle</span>
         </Link>
 
         {/* Desktop Navigation */}

@@ -19,11 +19,11 @@ export default function SignupPage() {
           <div className="text-center mb-8">
             {/* Logo */}
             <div className="flex justify-center mb-4">
-              <Image src="/images/logo.png" alt="Readle Logo" width={60} height={60} />
+              <Image src="/images/logo.png" alt="Readlle Logo" width={60} height={60} />
             </div>
             
             <h2 className="text-3xl font-bold text-gray-800 mb-2">Create Your Account</h2>
-            <p className="text-gray-600">Join Readle and help your child improve reading skills</p>
+            <p className="text-gray-600">Join Readlle and help your child improve reading skills</p>
           </div>
           
           {/* Signup Form Component */}

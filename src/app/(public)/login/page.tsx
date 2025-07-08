@@ -18,7 +18,7 @@ export default function LoginPage() {
           <div className="text-center mb-8">
             {/* Logo */}
             <div className="flex justify-center mb-4">
-              <Image src="/images/logo.png" alt="Readle Logo" width={60} height={60} />
+              <Image src="/images/logo.png" alt="Readlle Logo" width={60} height={60} />
             </div>
             
             <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>

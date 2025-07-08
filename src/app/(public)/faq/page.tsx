@@ -6,24 +6,24 @@ import { motion } from 'framer-motion';
 // FAQ data
 const faqData = [
   {
-    question: "What is Readle and how does it help children with dyslexia?",
-    answer: "Readle is an interactive learning platform designed specifically for children with dyslexia. We use evidence-based methods, engaging activities, and personalized learning paths to help children improve their reading skills. Our approach combines the latest research in neuroscience with fun, interactive technology to make reading enjoyable and accessible."
+    question: "What is Readlle and how does it help children with dyslexia?",
+    answer: "Readlle is an interactive learning platform designed specifically for children with dyslexia. We use evidence-based methods, engaging activities, and personalized learning paths to help children improve their reading skills. Our approach combines the latest research in neuroscience with fun, interactive technology to make reading enjoyable and accessible."
   },
   {
     question: "How do I know if my child has dyslexia?",
-    answer: "Common signs of dyslexia include difficulty with phonological processing, trouble decoding words, slow reading, and spelling challenges. Readle offers a free dyslexia identification quiz that can help you identify potential signs. However, a formal diagnosis should be made by a qualified professional. If you suspect your child may have dyslexia, we recommend taking our quiz and consulting with an educational psychologist or specialist."
+    answer: "Common signs of dyslexia include difficulty with phonological processing, trouble decoding words, slow reading, and spelling challenges. Readlle offers a free dyslexia identification quiz that can help you identify potential signs. However, a formal diagnosis should be made by a qualified professional. If you suspect your child may have dyslexia, we recommend taking our quiz and consulting with an educational psychologist or specialist."
   },
   {
-    question: "What age group is Readle suitable for?",
-    answer: "Readle is designed for children ages 5-12, with content tailored to different reading levels and abilities. Our platform adapts to your child's specific needs and grows with them as they progress in their reading journey."
+    question: "What age group is Readlle suitable for?",
+    answer: "Readlle is designed for children ages 5-12, with content tailored to different reading levels and abilities. Our platform adapts to your child's specific needs and grows with them as they progress in their reading journey."
   },
   {
-    question: "How much time should my child spend on Readle each day?",
+    question: "How much time should my child spend on Readlle each day?",
     answer: "We recommend 15-20 minute sessions, 3-5 times per week for optimal results. Consistency is more important than duration. Our platform is designed to keep sessions engaging but not overwhelming, as we understand the attention challenges that can come with dyslexia."
   },
   {
-    question: "Does Readle work alongside school curriculum?",
-    answer: "Yes! Readle is designed to complement school learning. Our methods align with educational standards while providing the specialized support that children with dyslexia may not always receive in traditional classroom settings. Many teachers recommend Readle as a supplementary tool for students who need extra reading support."
+    question: "Does Readlle work alongside school curriculum?",
+    answer: "Yes! Readlle is designed to complement school learning. Our methods align with educational standards while providing the specialized support that children with dyslexia may not always receive in traditional classroom settings. Many teachers recommend Readlle as a supplementary tool for students who need extra reading support."
   }
 ];
 
@@ -51,7 +51,7 @@ export default function FAQPage() {
               Frequently Asked Questions
             </h1>
             <p className="text-lg mb-8 text-gray-700 leading-relaxed">
-              Find answers to common questions about Readle and how our platform helps children with dyslexia discover the joy of reading.
+              Find answers to common questions about Readlle and how our platform helps children with dyslexia discover the joy of reading.
             </p>
           </motion.div>
         </div>

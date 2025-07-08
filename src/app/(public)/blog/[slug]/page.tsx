@@ -363,7 +363,7 @@ export default function BlogPostPage() {
       <footer className="py-8 px-6 md:px-12 lg:px-24 bg-white">
         <div className="max-w-7xl mx-auto text-center">
           <div className="text-gray-500 text-sm">
-            &copy; 2025 Readle. All rights reserved.
+            &copy; 2025 Readlle. All rights reserved.
           </div>
         </div>
       </footer>

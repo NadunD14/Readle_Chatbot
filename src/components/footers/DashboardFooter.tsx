@@ -18,7 +18,7 @@ const DashboardFooter: React.FC = () => {
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between">
         <div className="mb-3 sm:mb-0">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Readle Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Readlle Inc. All rights reserved.
           </p>
         </div>
 
