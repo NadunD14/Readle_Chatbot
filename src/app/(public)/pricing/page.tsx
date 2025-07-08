@@ -45,7 +45,7 @@ export default function PricingPage() {
                 <span className="text-4xl font-bold">$0</span>
                 <span className="text-gray-500 ml-2">forever</span>
               </div>
-              <p className="text-gray-600 mb-6">Perfect for trying out Readle</p>
+              <p className="text-gray-600 mb-6">Perfect for trying out Readlle</p>
               <hr className="my-6" />
               <ul className="mb-8 space-y-4">
                 <li className="flex items-start">
@@ -65,7 +65,7 @@ export default function PricingPage() {
                   <span className="text-gray-600">Email support</span>
                 </li>
               </ul>
-              <Link href="/sign-up/free" className="block text-center py-3 px-6 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-xl transition-colors duration-300">
+              <Link href="/signup" className="block text-center py-3 px-6 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-xl transition-colors duration-300">
                 Get Started
               </Link>
             </motion.div>
@@ -85,7 +85,7 @@ export default function PricingPage() {
                 <span className="text-4xl font-bold">$14.99</span>
                 <span className="text-gray-500 ml-2">/month</span>
               </div>
-              <p className="text-gray-600 mb-6">Unlock the full Readle experience</p>
+              <p className="text-gray-600 mb-6">Unlock the full Readlle experience</p>
               <hr className="my-6" />
               <ul className="mb-8 space-y-4">
                 <li className="flex items-start">
@@ -113,7 +113,7 @@ export default function PricingPage() {
                   <span className="text-gray-700">Parent resources and guides</span>
                 </li>
               </ul>
-              <Link href="/sign-up/pro-monthly" className="block text-center py-3 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+              <Link href="/signup" className="block text-center py-3 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                 Get Started
               </Link>
             </motion.div>
@@ -153,7 +153,7 @@ export default function PricingPage() {
                   <span className="text-gray-600">Phone support</span>
                 </li>
               </ul>
-              <Link href="/sign-up/pro-yearly" className="block text-center py-3 px-6 bg-gray-800 hover:bg-gray-900 text-white font-medium rounded-xl transition-colors duration-300">
+              <Link href="/signup" className="block text-center py-3 px-6 bg-gray-800 hover:bg-gray-900 text-white font-medium rounded-xl transition-colors duration-300">
                 Get Started
               </Link>
             </motion.div>
@@ -199,9 +199,9 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Child&rsquo;s Reading Experience?</h2>
           <p className="text-xl mb-10 text-indigo-100 max-w-2xl mx-auto">
-            Join thousands of families who&rsquo;ve discovered the joy of reading with Readle.
+            Join thousands of families who&rsquo;ve discovered the joy of reading with Readlle.
           </p>
-          <Link href="/sign-up" className="px-10 py-4 bg-white text-indigo-700 font-medium rounded-xl hover:bg-indigo-50 transition-all duration-300 text-center shadow-lg inline-block">
+          <Link href="/signup" className="px-10 py-4 bg-white text-indigo-700 font-medium rounded-xl hover:bg-indigo-50 transition-all duration-300 text-center shadow-lg inline-block">
             Get Started Today
           </Link>
         </div>

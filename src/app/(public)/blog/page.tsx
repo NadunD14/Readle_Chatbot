@@ -20,7 +20,7 @@ export default function BlogPage() {
               <span className="text-4xl">✏️</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-500">
-              Readle Blog
+              Readlle Blog
             </h1>
             <p className="text-lg mb-8 text-gray-700 leading-relaxed max-w-3xl mx-auto">
               Insights, strategies, and resources for parents and educators supporting children with dyslexia
@@ -114,7 +114,7 @@ export default function BlogPage() {
       <footer className="py-8 px-6 md:px-12 lg:px-24 bg-white">
         <div className="max-w-7xl mx-auto text-center">
           <div className="text-gray-500 text-sm">
-            &copy; 2025 Readle. All rights reserved.
+            &copy; 2025 Readlle. All rights reserved.
           </div>
         </div>
       </footer>

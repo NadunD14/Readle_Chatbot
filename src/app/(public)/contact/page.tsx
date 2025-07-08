@@ -56,7 +56,7 @@ export default function ContactPage() {
               Get In Touch
             </h1>
             <p className="text-lg mb-8 text-gray-700 leading-relaxed">
-              Have questions about Readle? Need support with your account? We&apos;re here to help you and your child on this reading journey.
+              Have questions about readlle? Need support with your account? We&apos;re here to help you and your child on this reading journey.
             </p>
           </motion.div>
         </div>
@@ -102,7 +102,7 @@ export default function ContactPage() {
                           onChange={handleChange}
                           required
                           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                          placeholder="John Doe"
+                          placeholder="Kyle Miller"
                         />
                       </div>
                       <div>
@@ -115,7 +115,7 @@ export default function ContactPage() {
                           onChange={handleChange}
                           required
                           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                          placeholder="john@example.com"
+                          placeholder="kmiller@example.com"
                         />
                       </div>
                     </div>
@@ -172,13 +172,13 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-800">Email</h4>
-                      <a href="mailto:support@readle.com" className="text-indigo-600 hover:text-indigo-800 transition-colors">
-                        support@readle.com
+                      <a href="mailto:support@readlle.com" className="text-indigo-600 hover:text-indigo-800 transition-colors">
+                        support@readlle.com
                       </a>
                     </div>
                   </div>
                   
-                  <div className="flex items-start">
+                  {/* <div className="flex items-start">
                     <div className="bg-indigo-100 p-3 rounded-full mr-4">
                       <svg className="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
@@ -187,10 +187,10 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-800">Phone</h4>
                       <a href="tel:18003212123" className="text-indigo-600 hover:text-indigo-800 transition-colors">
-                        1-800-READLE-1
+                        1-800-readlle-1
                       </a>
                     </div>
-                  </div>
+                  </div> */}
                   
                   <div className="flex items-start">
                     <div className="bg-indigo-100 p-3 rounded-full mr-4">
@@ -202,9 +202,8 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-semibold text-gray-800">Office</h4>
                       <p className="text-gray-600">
-                        123 Reading Lane<br />
-                        Literacy City, RC 10101<br />
-                        United States
+                        852 Oaks Lane<br />
+                        Litedane City, Virginia<br />
                       </p>
                     </div>
                   </div>
