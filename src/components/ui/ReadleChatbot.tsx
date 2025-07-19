@@ -14,6 +14,7 @@ interface Message {
 
 interface ChatbotProps {
     isOpen: boolean;
+    onClose: () => void;
 }
 
 // Helper function to detect and format structured content
@@ -203,7 +204,7 @@ const FormattedMessage = ({ content }: { content: string }) => {
     );
 };
 
-const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen }) => {
+const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<Message[]>([
         {
             id: '1',
