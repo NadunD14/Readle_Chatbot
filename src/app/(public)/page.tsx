@@ -11,7 +11,7 @@ export default function LandingPage() {
       <section className="py-20 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-12 md:mb-0">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -23,7 +23,7 @@ export default function LandingPage() {
                 Confident Reading Starts Here
               </h1>
               <p className="text-lg mb-8 text-gray-700 leading-relaxed">
-                Empower your child with dyslexia to enjoy reading with 
+                Empower your child with dyslexia to enjoy reading with
                 <span className="underline decoration-yellow-400 decoration-4"> interactive, proven methods </span>
                 designed specifically for their unique learning needs.
               </p>
@@ -39,11 +39,11 @@ export default function LandingPage() {
             </motion.div>
           </div>
           <div className="md:w-1/2">
-            <Image 
-              src="/images/hero-image.png" 
-              alt="Children enjoying reading" 
-              width={550} 
-              height={450} 
+            <Image
+              src="/images/hero-image.png"
+              alt="Children enjoying reading"
+              width={550}
+              height={450}
               className="mx-auto rounded-2xl"
             />
           </div>
@@ -58,7 +58,7 @@ export default function LandingPage() {
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">How Readlle Helps Your Child</h2>
             <p className="text-gray-600 max-w-xl mx-auto">Tools designed with dyslexic readers in mind</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
             <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 text-center group hover:-translate-y-1">
@@ -110,7 +110,7 @@ export default function LandingPage() {
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">How It Works</h2>
             <p className="text-gray-600 max-w-xl mx-auto">Follow these simple steps to get started with Readlle</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white p-8 border-t-4 border-purple-400 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-start">
               <div className="bg-purple-100 p-4 rounded-2xl mr-6">
@@ -121,7 +121,7 @@ export default function LandingPage() {
                 <p className="text-gray-600">Join Readlle and set up your profile to begin your child&apos;s reading journey.</p>
               </div>
             </div>
-            
+
             <div className="bg-white p-8 border-t-4 border-blue-400 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-start">
               <div className="bg-blue-100 p-4 rounded-2xl mr-6">
                 <Image src="/images/how-it-works/image-1.png" alt="Setup Parent" width={70} height={70} />
@@ -131,7 +131,7 @@ export default function LandingPage() {
                 <p className="text-gray-600">Customize your dashboard to monitor progress and set preferences for your child.</p>
               </div>
             </div>
-            
+
             <div className="bg-white p-8 border-t-4 border-red-400 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-start">
               <div className="bg-red-100 p-4 rounded-2xl mr-6">
                 <Image src="/images/how-it-works/image-2.png" alt="Setup Child" width={70} height={70} />
@@ -141,7 +141,7 @@ export default function LandingPage() {
                 <p className="text-gray-600">Create a profile for your child that personalizes their reading experience.</p>
               </div>
             </div>
-            
+
             <div className="bg-white p-8 border-t-4 border-green-400 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-start">
               <div className="bg-green-100 p-4 rounded-2xl mr-6">
                 <Image src="/images/how-it-works/image-3.png" alt="Start Learning" width={70} height={70} />
@@ -172,11 +172,11 @@ export default function LandingPage() {
               </Link>
             </div>
             <div className="md:w-1/3">
-              <Image 
-                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80" 
-                alt="Child reading with focused expression" 
-                width={400} 
-                height={320} 
+              <Image
+                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80"
+                alt="Child reading with focused expression"
+                width={400}
+                height={320}
                 className="mx-auto rounded-xl drop-shadow-xl"
               />
             </div>
@@ -192,7 +192,7 @@ export default function LandingPage() {
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-2">What Parents Are Saying</h2>
             <p className="text-gray-600 max-w-xl mx-auto">Real experiences from families using Readlle</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
               <div className="flex items-center mb-6">
@@ -209,7 +209,7 @@ export default function LandingPage() {
                 &ldquo;Before Readlle, my son avoided reading at all costs. Now he actively asks to practice! The games make learning fun, and I&rsquo;ve seen remarkable progress in just a few months.&rdquo;
               </p>
             </div>
-            
+
             <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
               <div className="flex items-center mb-6">
                 <div className="bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full p-4 mr-4 text-white font-bold text-xl">
@@ -225,7 +225,7 @@ export default function LandingPage() {
                 &ldquo;The personalized approach makes all the difference. My daughter&rsquo;s teacher has noticed significant improvement in her reading confidence. The progress tracking helps us celebrate every win.&rdquo;
               </p>
             </div>
-            
+
             <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
               <div className="flex items-center mb-6">
                 <div className="bg-gradient-to-br from-pink-400 to-purple-500 rounded-full p-4 mr-4 text-white font-bold text-xl">
@@ -240,7 +240,7 @@ export default function LandingPage() {
                 &ldquo;My child loves the games and activities! They&rsquo;ve made learning to read enjoyable instead of frustrating.&rdquo;
               </p>
             </div>
-            
+
             <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
               <div className="flex items-center mb-6">
                 <div className="bg-gradient-to-br from-green-400 to-teal-500 rounded-full p-4 mr-4 text-white font-bold text-xl">
@@ -312,16 +312,6 @@ export default function LandingPage() {
           <p className="mt-6 text-indigo-200 text-sm">No credit card required. Cancel anytime.</p>
         </div>
       </section>
-
-      {/* Accessibility Control - Fixed Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button 
-          className="flex items-center justify-center w-14 h-14 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow text-2xl border-2 border-indigo-200"
-          aria-label="Accessibility options"
-        >
-          Aa
-        </button>
-      </div>
     </main>
   );
 }
