@@ -33,15 +33,15 @@ const getTypeIcon = (type: ActivityCardProps['type']) => {
 const getTypeColor = (type: ActivityCardProps['type']) => {
   switch (type) {
     case 'phonics':
-      return 'from-blue-400 to-indigo-500';
+      return 'bg-[#4F46E5]';
     case 'spelling':
-      return 'from-green-400 to-teal-500';
+      return 'bg-[#10B981]';
     case 'reading':
-      return 'from-purple-400 to-pink-500';
+      return 'bg-[#F59E0B]';
     case 'comprehension':
-      return 'from-yellow-400 to-orange-500';
+      return 'bg-[#3B82F6]';
     default:
-      return 'from-gray-400 to-gray-600';
+      return 'bg-[#6B7280]';
   }
 };
 
@@ -77,7 +77,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
       className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
       whileHover={{ y: -5 }}
     >
-      <div className={`bg-gradient-to-r ${typeColor} p-4 text-white relative`}>
+      <div className={`${typeColor} p-4 text-white relative`}>
         <div className="flex justify-between items-center">
           <span className="text-3xl">{typeIcon}</span>
           <span className="text-sm font-medium opacity-90">{difficultyLabel}</span>
@@ -85,7 +85,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
         
         {isNew && (
           <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
-            <div className="bg-yellow-400 text-indigo-900 text-xs font-bold px-2 py-1 rounded-full animate-bounce">
+            <div className="bg-[#F59E0B] text-white text-xs font-bold px-2 py-1 rounded-full animate-bounce">
               NEW!
             </div>
           </div>
@@ -105,32 +105,32 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
           </div>
         )}
         
-        <h3 className="font-bold text-lg text-gray-800 mb-2">{title}</h3>
+        <h3 className="font-bold text-lg text-[#1F2937] mb-2">{title}</h3>
         
         {description && (
-          <p className="text-gray-600 text-sm mb-4 line-clamp-2">{description}</p>
+          <p className="text-[#6B7280] text-sm mb-4 line-clamp-2">{description}</p>
         )}
         
         {completedPercentage > 0 && (
           <div className="mb-3">
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div className="h-2 bg-[#D1FAE5] rounded-full overflow-hidden">
               <div 
-                className="h-full bg-green-500 rounded-full" 
+                className="h-full bg-[#10B981] rounded-full" 
                 style={{ width: `${completedPercentage}%` }}
               />
             </div>
-            <p className="text-xs text-right mt-1 text-gray-500">{completedPercentage}% complete</p>
+            <p className="text-xs text-right mt-1 text-[#6B7280]">{completedPercentage}% complete</p>
           </div>
         )}
         
         <div className="flex justify-between items-center">
-          <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full capitalize">
+          <span className="text-xs bg-[#F3F4F6] text-[#6B7280] px-2 py-1 rounded-full capitalize">
             {type}
           </span>
           
           <Link 
             href={`/activities/${id}`}
-            className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg flex items-center transition-colors font-medium"
+            className="px-4 py-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-lg flex items-center transition-colors font-medium"
           >
             Start
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -352,14 +352,14 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     return (
         <div className="h-full flex flex-col bg-white rounded-lg shadow-xl overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-3 flex items-center justify-between">
+            <div className="bg-[#4F46E5] text-white px-4 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                         <Bot className="w-4 h-4" />
                     </div>
                     <div>
                         <h3 className="font-semibold">Readle Assistant</h3>
-                        <p className="text-xs opacity-80">Your dyslexia support companion</p>
+                        <p className="text-xs text-white opacity-80">Your dyslexia support companion</p>
                     </div>
                 </div>
                 <button
@@ -377,16 +377,16 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="bg-gray-50 border-b px-4 py-3 overflow-hidden"
+                        className="bg-[#F3F4F6] border-b px-4 py-3 overflow-hidden"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <h4 className="text-sm font-medium text-gray-700">Chat Options</h4>
-                                <p className="text-xs text-gray-500">Manage your conversation</p>
+                                <h4 className="text-sm font-medium text-[#1F2937]">Chat Options</h4>
+                                <p className="text-xs text-[#6B7280]">Manage your conversation</p>
                             </div>
                             <button
                                 onClick={clearChat}
-                                className="flex items-center gap-2 px-4 py-2 bg-red-100 text-red-700 rounded-lg text-sm hover:bg-red-200 transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 bg-[#FEE2E2] text-[#EF4444] rounded-lg text-sm hover:bg-[#FECACA] transition-colors"
                             >
                                 <Trash2 className="w-4 h-4" />
                                 Clear Chat
@@ -397,7 +397,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
             </AnimatePresence>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#F9FAFB]">
                 {messages.map((message) => (
                     <motion.div
                         key={message.id}
@@ -406,37 +406,37 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                         className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                         {message.sender === 'bot' && (
-                            <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-[#4F46E5] rounded-full flex items-center justify-center flex-shrink-0">
                                 <Bot className="w-4 h-4 text-white" />
                             </div>
                         )}
                         <div className="max-w-[85%] space-y-1">
                             <div
                                 className={`p-3 rounded-2xl ${message.sender === 'user'
-                                    ? 'bg-white text-gray-800 rounded-br-md'
-                                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-bl-md'
+                                    ? 'bg-white text-[#1F2937] rounded-br-md'
+                                    : 'bg-[#4F46E5] text-white rounded-bl-md'
                                     }`}
                                 style={message.sender === 'bot' ? { boxShadow: 'none', border: 'none' } : {}}
                             >
                                 {message.sender === 'user' ? (
-                                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                                    <p className="text-sm leading-relaxed whitespace-pre-wrap text-[#1F2937]">{message.content}</p>
                                 ) : (
                                     <FormattedMessage content={message.content} />
                                 )}
                             </div>
                             <div className="flex items-center justify-between px-2">
-                                <p className="text-xs text-gray-400">
+                                <p className="text-xs text-[#6B7280]">
                                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                 </p>
                                 {message.sender === 'bot' && message.sourcesUsed && (
-                                    <span className="text-xs bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 px-2 py-0.5 rounded-full border">
+                                    <span className="text-xs bg-[#E0E7FF] text-[#4F46E5] px-2 py-0.5 rounded-full border border-[#C7D2FE]">
                                         📚 Enhanced
                                     </span>
                                 )}
                             </div>
                         </div>
                         {message.sender === 'user' && (
-                            <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-[#6B7280] rounded-full flex items-center justify-center flex-shrink-0">
                                 <User className="w-4 h-4 text-white" />
                             </div>
                         )}
@@ -449,13 +449,13 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                         animate={{ opacity: 1, y: 0 }}
                         className="flex gap-3 justify-start"
                     >
-                        <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+                       <div className="w-8 h-8 bg-[#4F46E5] rounded-full flex items-center justify-center">
                             <Bot className="w-4 h-4 text-white" />
                         </div>
-                        <div className="bg-white border shadow-sm p-3 rounded-2xl rounded-bl-md">
+                       <div className="bg-white border border-[#D1D5DB] shadow-sm p-3 rounded-2xl rounded-bl-md">
                             <div className="flex items-center gap-2">
-                                <Loader2 className="w-4 h-4 animate-spin text-indigo-600" />
-                                <span className="text-sm text-gray-600">Thinking...</span>
+                               <Loader2 className="w-4 h-4 animate-spin text-[#4F46E5]" />
+                               <span className="text-sm text-[#6B7280]">Thinking...</span>
                             </div>
                         </div>
                     </motion.div>
@@ -482,7 +482,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                             }}
                             onKeyPress={handleKeyPress}
                             placeholder="Ask about dyslexia support"
-                            className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none text-sm bg-gray-50"
+                            className="w-full px-4 py-3 pr-12 border border-[#D1D5DB] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent resize-none text-sm bg-[#F3F4F6] text-[#1F2937]"
                             rows={1}
                             disabled={isLoading}
                             style={{ minHeight: '44px', overflowY: 'hidden' }}
@@ -491,13 +491,13 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                     <button
                         onClick={sendMessage}
                         disabled={!inputMessage.trim() || isLoading}
-                        className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-md"
+                        className="w-12 h-12 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-md"
                     >
                         <Send className="w-4 h-4" />
                     </button>
                 </div>
                 <div className="flex items-center justify-center mt-2">
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-[#6B7280]">
                         Powered by Groq • Enhanced with dyslexia knowledge • Emotional support ready
                     </p>
                 </div>

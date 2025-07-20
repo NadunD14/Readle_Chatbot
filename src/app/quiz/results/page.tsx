@@ -127,7 +127,7 @@ export default function ResultsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] py-12 px-6">
+    <div className="min-h-screen bg-[#F9FAFB] py-12 px-6">
       <motion.div 
         className="max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
@@ -137,7 +137,11 @@ export default function ResultsPage() {
         {/* Result Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
           {/* Header with result */}
-          <div className={`bg-gradient-to-r ${result.color} p-8 text-white`}>
+          <div className={`${
+            result.riskLevel === 'high' ? 'bg-[#EF4444]' :
+            result.riskLevel === 'medium' ? 'bg-[#F59E0B]' :
+            'bg-[#10B981]'
+          } p-8 text-white`}>
             <h1 className="text-3xl font-bold mb-4">{result.title}</h1>
             <p className="text-lg">{result.description}</p>
           </div>
@@ -145,31 +149,31 @@ export default function ResultsPage() {
           {/* Main content */}
           <div className="p-8">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800">Recommendations</h2>
+              <h2 className="text-2xl font-bold mb-4 text-[#1F2937]">Recommendations</h2>
               <ul className="space-y-3">
                 {recommendations.map((recommendation, index) => (
                   <li key={index} className="flex items-start">
-                    <div className="bg-indigo-100 p-1 rounded-full mr-3 mt-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="bg-[#D1FAE5] p-1 rounded-full mr-3 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#10B981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="text-gray-700">{recommendation}</span>
+                    <span className="text-[#1F2937]">{recommendation}</span>
                   </li>
                 ))}
               </ul>
             </div>
             
             <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800">Next Steps</h2>
-              <p className="text-gray-700 mb-6">
+              <h2 className="text-2xl font-bold mb-4 text-[#1F2937]">Next Steps</h2>
+              <p className="text-[#6B7280] mb-6">
                 Readle offers personalized learning tools specifically designed to support children with diverse reading needs. Our platform adapts to your child&apos;s unique requirements and provides engaging activities to build reading confidence.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
                   href="/dashboard" 
-                  className="px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-500 text-white font-medium rounded-xl hover:shadow-lg hover:shadow-indigo-200 transition-all duration-300 text-center flex items-center justify-center"
+                  className="px-6 py-4 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-medium rounded-xl hover:shadow-lg transition-all duration-300 text-center flex items-center justify-center"
                 >
                   <span>Start Learning Path</span>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -179,7 +183,7 @@ export default function ResultsPage() {
                 
                 <button 
                   onClick={resetQuiz}
-                  className="px-6 py-4 border-2 border-indigo-200 text-indigo-600 font-medium rounded-xl hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-300 text-center flex items-center justify-center"
+                  className="px-6 py-4 border-2 border-[#C7D2FE] text-[#4F46E5] font-medium rounded-xl hover:border-[#A5B4FC] hover:bg-[#E0E7FF] transition-all duration-300 text-center flex items-center justify-center"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -189,9 +193,9 @@ export default function ResultsPage() {
               </div>
             </div>
             
-            <div className="bg-indigo-50 p-6 rounded-xl">
-              <h3 className="font-bold text-indigo-900 mb-2">Important Note</h3>
-              <p className="text-indigo-800 text-sm">
+            <div className="bg-[#E0E7FF] p-6 rounded-xl">
+              <h3 className="font-bold text-[#1F2937] mb-2">Important Note</h3>
+              <p className="text-[#1F2937] text-sm">
                 This screening tool provides an initial assessment based on your responses and is not a clinical diagnosis. 
                 For a formal diagnosis of dyslexia, consult with a qualified educational psychologist or learning specialist.
               </p>
@@ -201,15 +205,15 @@ export default function ResultsPage() {
         
         {/* Summary of answers */}
         <details className="bg-white rounded-xl shadow-md p-6 mb-8">
-          <summary className="text-xl font-semibold text-indigo-700 cursor-pointer">
+          <summary className="text-xl font-semibold text-[#4F46E5] cursor-pointer">
             View Your Responses
           </summary>
           <div className="mt-4 border-t pt-4">
             <ul className="space-y-3">
               {questions.map((question) => (
-                <li key={question.id} className="grid grid-cols-1 md:grid-cols-3 gap-4 pb-3 border-b border-gray-100">
-                  <div className="md:col-span-2 font-medium text-gray-800">{question.question}</div>
-                  <div className="text-indigo-600 font-medium">
+                <li key={question.id} className="grid grid-cols-1 md:grid-cols-3 gap-4 pb-3 border-b border-[#F3F4F6]">
+                  <div className="md:col-span-2 font-medium text-[#1F2937]">{question.question}</div>
+                  <div className="text-[#4F46E5] font-medium">
                     {answers[question.id] ? answers[question.id] : "Not answered"}
                   </div>
                 </li>
@@ -220,26 +224,26 @@ export default function ResultsPage() {
         
         {/* Additional resources */}
         <div className="bg-white rounded-xl shadow-md p-6">
-          <h2 className="text-2xl font-bold mb-4 text-gray-800">Additional Resources</h2>
+          <h2 className="text-2xl font-bold mb-4 text-[#1F2937]">Additional Resources</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-lg">
-              <h3 className="font-bold text-indigo-800 mb-2">Reading Resources</h3>
-              <p className="text-gray-700 mb-3">Explore our library of dyslexia-friendly books and learning materials.</p>
-              <Link href="/resources" className="text-indigo-600 font-medium hover:text-indigo-800">Learn more →</Link>
+            <div className="bg-[#F3F4F6] p-4 rounded-lg">
+              <h3 className="font-bold text-[#1F2937] mb-2">Reading Resources</h3>
+              <p className="text-[#6B7280] mb-3">Explore our library of dyslexia-friendly books and learning materials.</p>
+              <Link href="/resources" className="text-[#4F46E5] font-medium hover:text-[#4338CA]">Learn more →</Link>
             </div>
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-4 rounded-lg">
-              <h3 className="font-bold text-purple-800 mb-2">Parent Community</h3>
-              <p className="text-gray-700 mb-3">Connect with other parents navigating similar challenges.</p>
-              <Link href="/community" className="text-purple-600 font-medium hover:text-purple-800">Join now →</Link>
+            <div className="bg-[#F3F4F6] p-4 rounded-lg">
+              <h3 className="font-bold text-[#1F2937] mb-2">Parent Community</h3>
+              <p className="text-[#6B7280] mb-3">Connect with other parents navigating similar challenges.</p>
+              <Link href="/community" className="text-[#4F46E5] font-medium hover:text-[#4338CA]">Join now →</Link>
             </div>
           </div>
           
           {/* Alternative navigation at bottom */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="mt-8 pt-6 border-t border-[#D1D5DB]">
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
                   href="/" 
-                  className="px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-medium rounded-xl hover:shadow-lg hover:shadow-green-200 transition-all duration-300 text-center flex items-center justify-center"
+                  className="px-6 py-4 bg-[#10B981] hover:bg-[#059669] text-white font-medium rounded-xl hover:shadow-lg transition-all duration-300 text-center flex items-center justify-center"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
@@ -248,7 +252,7 @@ export default function ResultsPage() {
                 </Link>
               <Link 
                 href="/quiz/start" 
-                className="px-6 py-3 text-indigo-600 border border-indigo-200 rounded-lg hover:bg-indigo-50 transition-colors text-center"
+                className="px-6 py-3 text-[#4F46E5] border border-[#C7D2FE] rounded-lg hover:bg-[#E0E7FF] transition-colors text-center"
               >
                 Share Results
               </Link>

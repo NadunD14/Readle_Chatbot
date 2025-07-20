@@ -16,7 +16,7 @@ export default function ParentDashboard() {
   const userName = "Kasun"; // This should come from your user context or state
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] py-8 px-6">
+    <div className="min-h-screen bg-[#F9FAFB] py-8 px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -25,10 +25,10 @@ export default function ParentDashboard() {
       >
         {/* Welcome Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-indigo-800 mb-1">
+          <h1 className="text-3xl font-bold text-[#1F2937] mb-1">
             Welcome back, {userName}!
           </h1>
-          <p className="text-indigo-600">Let&apos;s continue your child&apos;s reading journey</p>
+          <p className="text-[#6B7280]">Let&apos;s continue your child&apos;s reading journey</p>
         </div>
         
         {/* Stats Overview */}
@@ -36,85 +36,85 @@ export default function ParentDashboard() {
           {/* Children Count */}
           <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center mb-4">
-              <div className="bg-blue-100 p-3 rounded-full mr-3">
+              <div className="bg-[#DBEAFE] p-3 rounded-full mr-3">
                 <span className="text-2xl" role="img" aria-label="Children">👨‍👩‍👧‍👦</span>
               </div>
-              <h3 className="text-gray-600 font-medium">Total Children</h3>
+              <h3 className="text-[#6B7280] font-medium">Total Children</h3>
             </div>
-            <p className="text-3xl font-bold text-gray-800">{DASHBOARD_STATS.totalChildren}</p>
+            <p className="text-3xl font-bold text-[#1F2937]">{DASHBOARD_STATS.totalChildren}</p>
           </div>
           
           {/* Total Activities */}
           <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center mb-4">
-              <div className="bg-purple-100 p-3 rounded-full mr-3">
+              <div className="bg-[#E0E7FF] p-3 rounded-full mr-3">
                 <span className="text-2xl" role="img" aria-label="Activities">📚</span>
               </div>
-              <h3 className="text-gray-600 font-medium">Total Activities</h3>
+              <h3 className="text-[#6B7280] font-medium">Total Activities</h3>
             </div>
-            <p className="text-3xl font-bold text-gray-800">{DASHBOARD_STATS.totalActivities}</p>
+            <p className="text-3xl font-bold text-[#1F2937]">{DASHBOARD_STATS.totalActivities}</p>
           </div>
           
           {/* Completed Activities */}
           <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center mb-4">
-              <div className="bg-green-100 p-3 rounded-full mr-3">
+              <div className="bg-[#D1FAE5] p-3 rounded-full mr-3">
                 <span className="text-2xl" role="img" aria-label="Completed">✅</span>
               </div>
-              <h3 className="text-gray-600 font-medium">Completed</h3>
+              <h3 className="text-[#6B7280] font-medium">Completed</h3>
             </div>
-            <p className="text-3xl font-bold text-gray-800">{DASHBOARD_STATS.completedActivities}</p>
+            <p className="text-3xl font-bold text-[#1F2937]">{DASHBOARD_STATS.completedActivities}</p>
           </div>
           
           {/* Average Progress */}
           <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center mb-4">
-              <div className="bg-yellow-100 p-3 rounded-full mr-3">
+              <div className="bg-[#FEF3C7] p-3 rounded-full mr-3">
                 <span className="text-2xl" role="img" aria-label="Progress">📈</span>
               </div>
-              <h3 className="text-gray-600 font-medium">Avg. Progress</h3>
+              <h3 className="text-[#6B7280] font-medium">Avg. Progress</h3>
             </div>
-            <p className="text-3xl font-bold text-gray-800">{DASHBOARD_STATS.averageProgress}%</p>
+            <p className="text-3xl font-bold text-[#1F2937]">{DASHBOARD_STATS.averageProgress}%</p>
           </div>
         </div>
         
         {/* Quick Access */}
         <div className="bg-white p-8 rounded-xl shadow-md mb-8">
-          <h2 className="text-xl font-bold text-gray-800 mb-6">Quick Actions</h2>
+          <h2 className="text-xl font-bold text-[#1F2937] mb-6">Quick Actions</h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link href="/children" className="block p-6 bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-indigo-100">
+            <Link href="/children" className="block p-6 bg-[#F3F4F6] rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-[#E0E7FF]">
               <div className="flex items-center">
-                <div className="bg-indigo-100 p-3 rounded-full mr-4">
+                <div className="bg-[#E0E7FF] p-3 rounded-full mr-4">
                   <span className="text-2xl" role="img" aria-label="Children">👪</span>
                 </div>
                 <div>
-                  <h3 className="font-medium text-indigo-800 mb-1">View Children</h3>
-                  <p className="text-sm text-gray-600">Manage profiles and progress</p>
+                  <h3 className="font-medium text-[#1F2937] mb-1">View Children</h3>
+                  <p className="text-sm text-[#6B7280]">Manage profiles and progress</p>
                 </div>
               </div>
             </Link>
             
-            <Link href="#" className="block p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-purple-100">
+            <Link href="#" className="block p-6 bg-[#F3F4F6] rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-[#FEF3C7]">
               <div className="flex items-center">
-                <div className="bg-purple-100 p-3 rounded-full mr-4">
+                <div className="bg-[#FEF3C7] p-3 rounded-full mr-4">
                   <span className="text-2xl" role="img" aria-label="Resources">📖</span>
                 </div>
                 <div>
-                  <h3 className="font-medium text-purple-800 mb-1">Resources</h3>
-                  <p className="text-sm text-gray-600">Learning materials and guides</p>
+                  <h3 className="font-medium text-[#1F2937] mb-1">Resources</h3>
+                  <p className="text-sm text-[#6B7280]">Learning materials and guides</p>
                 </div>
               </div>
             </Link>
             
-            <Link href="/account" className="block p-6 bg-gradient-to-br from-green-50 to-teal-50 rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-green-100">
+            <Link href="/account" className="block p-6 bg-[#F3F4F6] rounded-xl hover:shadow-md transition-all hover:-translate-y-1 border border-[#D1FAE5]">
               <div className="flex items-center">
-                <div className="bg-green-100 p-3 rounded-full mr-4">
+                <div className="bg-[#D1FAE5] p-3 rounded-full mr-4">
                   <span className="text-2xl" role="img" aria-label="Account">⚙️</span>
                 </div>
                 <div>
-                  <h3 className="font-medium text-green-800 mb-1">Account</h3>
-                  <p className="text-sm text-gray-600">Settings and preferences</p>
+                  <h3 className="font-medium text-[#1F2937] mb-1">Account</h3>
+                  <p className="text-sm text-[#6B7280]">Settings and preferences</p>
                 </div>
               </div>
             </Link>
@@ -123,7 +123,7 @@ export default function ParentDashboard() {
         
         {/* Recent Activity */}
         <div className="bg-white p-8 rounded-xl shadow-md">
-          <h2 className="text-xl font-bold text-gray-800 mb-6">Recent Activity</h2>
+          <h2 className="text-xl font-bold text-[#1F2937] mb-6">Recent Activity</h2>
           
           <div className="space-y-4">
             {[
@@ -131,19 +131,19 @@ export default function ParentDashboard() {
               { child: "Shenaya", activity: "Started 'CVC Words'", time: "Yesterday", icon: "✍️" },
               { child: "Olivia", activity: "Took reading assessment", time: "2 days ago", icon: "📝" }
             ].map((item, index) => (
-              <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
-                <div className="bg-indigo-100 p-3 rounded-full mr-4">
+              <div key={index} className="flex items-center p-4 bg-[#F3F4F6] rounded-lg">
+                <div className="bg-[#E0E7FF] p-3 rounded-full mr-4">
                   <span className="text-xl">{item.icon}</span>
                 </div>
                 <div className="flex-1">
-                  <p className="font-medium text-gray-800">
-                    {item.child} <span className="font-normal text-gray-600">{item.activity}</span>
+                  <p className="font-medium text-[#1F2937]">
+                    {item.child} <span className="font-normal text-[#6B7280]">{item.activity}</span>
                   </p>
-                  <p className="text-sm text-gray-500">{item.time}</p>
+                  <p className="text-sm text-[#6B7280]">{item.time}</p>
                 </div>
                 <Link 
                   href={`/child/${index + 1}`} 
-                  className="text-indigo-600 hover:text-indigo-800 transition-colors"
+                  className="text-[#4F46E5] hover:text-[#4338CA] transition-colors"
                 >
                   View
                 </Link>
@@ -154,7 +154,7 @@ export default function ParentDashboard() {
           <div className="mt-6 text-center">
             <Link 
               href="/children" 
-              className="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors inline-flex items-center"
+              className="px-6 py-3 bg-[#4F46E5] text-white rounded-xl hover:bg-[#4338CA] transition-colors inline-flex items-center"
             >
               View All Children
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
