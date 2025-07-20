@@ -352,7 +352,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     return (
         <div className="h-full flex flex-col bg-white rounded-lg shadow-xl overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-3 flex items-center justify-between">
+            {/* <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                         <Bot className="w-4 h-4" />
@@ -368,7 +368,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                 >
                     <Settings className="w-4 h-4" />
                 </button>
-            </div>
+            </div> */}
 
             {/* Settings Panel */}
             <AnimatePresence>
