@@ -103,7 +103,7 @@ const FloatingChatbot: React.FC = () => {
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Header */}
-                            <div className="bg-[#4F46E5] text-white p-4 flex items-center justify-between">
+                            {/* <div className="bg-[#4F46E5] text-white p-4 flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                                         <MessageCircle className="w-6 h-6" />
@@ -119,7 +119,7 @@ const FloatingChatbot: React.FC = () => {
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
-                            </div>
+                            </div> */}
 
                             {/* Content */}
                             <div className="flex-1 overflow-hidden">
