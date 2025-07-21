@@ -14,13 +14,13 @@ interface ProgressBarProps {
 const getThemeStyles = (theme: ProgressBarProps['theme']) => {
   switch (theme) {
     case 'rainbow':
-      return 'bg-gradient-to-r from-red-500 via-yellow-500 to-green-500';
+      return 'bg-[#10B981]';
     case 'space':
-      return 'bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-400';
+      return 'bg-[#4F46E5]';
     case 'ocean':
-      return 'bg-gradient-to-r from-blue-400 via-teal-500 to-cyan-400';
+      return 'bg-[#3B82F6]';
     default:
-      return 'bg-gradient-to-r from-indigo-500 to-purple-500';
+      return 'bg-[#4F46E5]';
   }
 };
 
@@ -49,7 +49,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
             size="small"
           />
         ) : (
-          <span className="text-indigo-700 font-medium">Level {level}</span>
+          <span className="text-[#4F46E5] font-medium">Level {level}</span>
         )}
         
         <div className="flex items-center">
@@ -61,17 +61,17 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
               </span>
             ))}
           </div>
-          <span className="text-indigo-700 font-medium">{validProgress}%</span>
+          <span className="text-[#4F46E5] font-medium">{validProgress}%</span>
         </div>
       </div>
       
-      <div className="h-8 bg-indigo-100 rounded-full overflow-hidden relative">
+      <div className="h-8 bg-[#D1FAE5] rounded-full overflow-hidden relative">
         {/* Milestone markers */}
         <div className="absolute inset-0 flex justify-between px-2">
           {[20, 40, 60, 80].map((marker) => (
             <div 
               key={marker} 
-              className="h-full w-0.5 bg-indigo-200 flex items-center justify-center"
+              className="h-full w-0.5 bg-[#A7F3D0] flex items-center justify-center"
               style={{opacity: marker <= validProgress ? 0.3 : 0.8}}
             >
               {/* Optional: Add icons at milestones */}
@@ -114,14 +114,14 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       
       {/* XP to next level */}
       {showNextLevelInfo && (
-        <div className="mt-1 text-right text-xs text-indigo-600 font-medium">
+        <div className="mt-1 text-right text-xs text-[#4F46E5] font-medium">
           {validProgress < 100 ? (
             <span>
               {100 - validProgress} XP to Level {level + 1}
               <span className="ml-1">✨</span>
             </span>
           ) : (
-            <span className="text-green-600">Ready to level up!</span>
+            <span className="text-[#10B981]">Ready to level up!</span>
           )}
         </div>
       )}

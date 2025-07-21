@@ -15,13 +15,13 @@ interface BadgeProps {
 const getTypeStyles = (type: BadgeProps['type']) => {
   switch (type) {
     case 'achievement':
-      return 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white';
+      return 'bg-[#4F46E5] text-white';
     case 'level':
-      return 'bg-gradient-to-r from-blue-400 to-cyan-500 text-white';
+      return 'bg-[#3B82F6] text-white';
     case 'reward':
-      return 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white';
+      return 'bg-[#F59E0B] text-white';
     default:
-      return 'bg-gradient-to-r from-green-400 to-blue-500 text-white';
+      return 'bg-[#10B981] text-white';
   }
 };
 
@@ -63,7 +63,7 @@ const Badge: React.FC<BadgeProps> = ({
       
       {/* Optional category indicator */}
       {category && (
-        <span className="ml-1 bg-white bg-opacity-20 text-xs px-1.5 py-0.5 rounded-full">
+        <span className="ml-1 bg-white bg-opacity-30 text-xs px-1.5 py-0.5 rounded-full">
           {category}
         </span>
       )}

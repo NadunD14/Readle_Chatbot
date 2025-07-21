@@ -102,13 +102,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {errors.auth && (
-        <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-sm text-red-600">{errors.auth}</p>
+        <div className="p-3 bg-[#FEE2E2] border border-[#FECACA] rounded-lg">
+          <p className="text-sm text-[#EF4444]">{errors.auth}</p>
         </div>
       )}
       
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="email" className="block text-sm font-medium text-[#1F2937] mb-1">
           Email Address
         </label>
         <input
@@ -120,21 +120,21 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
           value={formData.email}
           onChange={handleChange}
           className={`appearance-none block w-full px-4 py-3 border ${
-            errors.email ? 'border-red-300' : 'border-gray-300'
-          } rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`}
+            errors.email ? 'border-[#FECACA]' : 'border-[#D1D5DB]'
+          } rounded-lg text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-[#4F46E5]`}
           placeholder="you@example.com"
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+          <p className="mt-1 text-sm text-[#EF4444]">{errors.email}</p>
         )}
       </div>
 
       <div>
         <div className="flex items-center justify-between mb-1">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="password" className="block text-sm font-medium text-[#1F2937]">
             Password
           </label>
-          <Link href="/forgot-password" className="text-sm text-indigo-600 hover:text-indigo-500 font-medium">
+          <Link href="/forgot-password" className="text-sm text-[#4F46E5] hover:text-[#4338CA] font-medium">
             Forgot password?
           </Link>
         </div>
@@ -147,12 +147,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
           value={formData.password}
           onChange={handleChange}
           className={`appearance-none block w-full px-4 py-3 border ${
-            errors.password ? 'border-red-300' : 'border-gray-300'
-          } rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`}
+           errors.password ? 'border-[#FECACA]' : 'border-[#D1D5DB]'
+         } rounded-lg text-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-[#4F46E5]`}
           placeholder="••••••••"
         />
         {errors.password && (
-          <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+         <p className="mt-1 text-sm text-[#EF4444]">{errors.password}</p>
         )}
       </div>
 
@@ -163,9 +163,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
           type="checkbox"
           checked={formData.rememberMe}
           onChange={handleChange}
-          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+         className="h-4 w-4 text-[#4F46E5] focus:ring-[#4F46E5] border-[#D1D5DB] rounded"
         />
-        <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
+       <label htmlFor="rememberMe" className="ml-2 block text-sm text-[#1F2937]">
           Remember me
         </label>
       </div>
@@ -174,7 +174,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-500 hover:shadow-lg hover:shadow-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+         className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#4F46E5] hover:bg-[#4338CA] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4F46E5] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <span className="flex items-center">
@@ -193,7 +193,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ redirectPath }) => {
       <div className="text-center">
         <p className="text-sm text-gray-600">
           Don&rsquo;t have an account?{' '}
-          <Link href="/sign-up" className="text-indigo-600 hover:text-indigo-500 font-medium">
+         <Link href="/sign-up" className="text-[#4F46E5] hover:text-[#4338CA] font-medium">
             Sign up now
           </Link>
         </p>

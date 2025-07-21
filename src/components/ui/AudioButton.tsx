@@ -38,9 +38,9 @@ const AudioButton: React.FC<AudioButtonProps> = ({
 
   // Variant classes
   const variantClasses = {
-    primary: 'bg-indigo-500 hover:bg-indigo-600 text-white shadow-md',
-    secondary: 'bg-blue-100 hover:bg-blue-200 text-blue-700 border border-blue-300',
-    ghost: 'bg-transparent hover:bg-indigo-100 text-indigo-600',
+    primary: 'bg-[#4F46E5] hover:bg-[#4338CA] text-white shadow-md',
+    secondary: 'bg-[#DBEAFE] hover:bg-[#BFDBFE] text-[#3B82F6] border border-[#93C5FD]',
+    ghost: 'bg-transparent hover:bg-[#E0E7FF] text-[#4F46E5]',
   };
 
   return (

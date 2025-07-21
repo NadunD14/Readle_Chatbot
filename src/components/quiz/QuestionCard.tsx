@@ -22,7 +22,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
       transition={{ duration: 0.4 }}
       className="bg-white rounded-2xl shadow-xl p-6 md:p-8"
     >
-      <h2 className="text-xl md:text-2xl font-bold mb-6 text-gray-800">{question}</h2>
+      <h2 className="text-xl md:text-2xl font-bold mb-6 text-[#1F2937]">{question}</h2>
       
       <div className="space-y-3">
         {options.map((option, index) => (
@@ -32,8 +32,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             className={`w-full text-left p-4 rounded-xl transition-all duration-200 flex items-center
               ${
                 selectedAnswer === option
-                  ? 'bg-indigo-100 border-2 border-indigo-500 text-indigo-700'
-                  : 'bg-gray-50 border-2 border-gray-200 hover:border-indigo-200 text-gray-700 hover:bg-gray-100'
+                  ? 'bg-[#E0E7FF] border-2 border-[#4F46E5] text-[#4F46E5]'
+                  : 'bg-[#F3F4F6] border-2 border-[#D1D5DB] hover:border-[#C7D2FE] text-[#1F2937] hover:bg-[#E0E7FF]'
               }
             `}
             aria-pressed={selectedAnswer === option}
@@ -41,8 +41,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
             <div className={`w-6 h-6 rounded-full mr-3 flex items-center justify-center border-2
               ${
                 selectedAnswer === option
-                  ? 'border-indigo-500 bg-indigo-500'
-                  : 'border-gray-400'
+                  ? 'border-[#4F46E5] bg-[#4F46E5]'
+                  : 'border-[#6B7280]'
               }
             `}>
               {selectedAnswer === option && (

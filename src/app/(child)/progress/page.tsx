@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 export default function ProgressPage() {
   const [selectedTimeframe, setSelectedTimeframe] = useState<'week' | 'month' | 'all'>('week');
-  
+
   // Mock progress data
   const progressData = {
     currentLevel: CHILD.level,
@@ -21,7 +21,7 @@ export default function ProgressPage() {
     weeklyStreak: 7,
     longestStreak: 12,
     timeSpent: 180, // minutes this week
-    
+
     // Activity breakdown by type
     activityStats: {
       phonics: { completed: 8, total: 12, accuracy: 85 },
@@ -29,7 +29,7 @@ export default function ProgressPage() {
       reading: { completed: 12, total: 15, accuracy: 88 },
       comprehension: { completed: 6, total: 8, accuracy: 90 }
     },
-    
+
     // Weekly progress data
     weeklyData: [
       { day: 'Mon', activities: 2, stars: 15, timeSpent: 25 },
@@ -40,7 +40,7 @@ export default function ProgressPage() {
       { day: 'Sat', activities: 3, stars: 25, timeSpent: 40 },
       { day: 'Sun', activities: 2, stars: 16, timeSpent: 15 }
     ],
-    
+
     // Level milestones
     levelMilestones: [
       { level: 1, unlockedAt: new Date('2025-05-01'), badge: 'First Steps' },
@@ -52,10 +52,10 @@ export default function ProgressPage() {
 
   // Calculate completion percentage
   const completionPercentage = Math.round((progressData.completedActivities / progressData.totalActivities) * 100);
-  
+
   // Get recent badges
   const recentBadges = getRecentBadges().slice(0, 6);
-  
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1 }
@@ -78,12 +78,12 @@ export default function ProgressPage() {
         {/* Level Progress & Stats Overview */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Current Level Progress */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-6">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=50&h=50&fit=crop"
                 alt="Level progress"
                 width={48}
@@ -95,14 +95,14 @@ export default function ProgressPage() {
                 <p className="text-gray-600">Your Learning Level</p>
               </div>
             </div>
-            
-            <ProgressBar 
-              progress={progressData.currentProgress} 
-              level={progressData.currentLevel} 
-              theme="rainbow" 
+
+            <ProgressBar
+              progress={progressData.currentProgress}
+              level={progressData.currentLevel}
+              theme="rainbow"
               animate={true}
             />
-            
+
             <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-3 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl">
                 <div className="text-2xl font-bold text-yellow-600">{progressData.totalStars}</div>
@@ -124,12 +124,12 @@ export default function ProgressPage() {
           </motion.div>
 
           {/* Achievement Summary */}
-          <motion.div 
+          <motion.div
             className="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 rounded-2xl shadow-lg text-white"
             variants={itemVariants}
           >
             <div className="text-center">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=80&h=80&fit=crop"
                 alt="Trophy"
                 width={80}
@@ -139,7 +139,7 @@ export default function ProgressPage() {
               <h3 className="text-2xl font-bold mb-2">Amazing Progress!</h3>
               <div className="text-4xl font-bold mb-1">{completionPercentage}%</div>
               <p className="text-indigo-100 text-sm">Activities Completed</p>
-              
+
               <div className="mt-4 pt-4 border-t border-indigo-300">
                 <p className="text-sm text-indigo-100">Next milestone at 75%</p>
                 <p className="text-xs text-indigo-200">Keep going, you&apos;re doing great!</p>
@@ -149,12 +149,12 @@ export default function ProgressPage() {
         </div>
 
         {/* Activity Categories Progress */}
-        <motion.div 
+        <motion.div
           className="bg-white p-6 rounded-2xl shadow-lg mb-8"
           variants={itemVariants}
         >
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Skills Progress</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {Object.entries(progressData.activityStats).map(([type, stats]) => {
               const percentage = Math.round((stats.completed / stats.total) * 100);
@@ -164,20 +164,20 @@ export default function ProgressPage() {
                 reading: { bg: 'from-purple-400 to-pink-500', icon: '📚' },
                 comprehension: { bg: 'from-yellow-400 to-orange-500', icon: '🧩' }
               };
-              
+
               return (
                 <div key={type} className="text-center">
                   <div className={`bg-gradient-to-br ${colors[type as keyof typeof colors].bg} w-20 h-20 rounded-2xl mx-auto mb-3 flex items-center justify-center`}>
                     <span className="text-3xl">{colors[type as keyof typeof colors].icon}</span>
                   </div>
                   <h3 className="font-bold text-gray-800 capitalize mb-2">{type}</h3>
-                  
+
                   {/* Progress Circle */}
                   <div className="relative w-16 h-16 mx-auto mb-2">
                     <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 64 64">
-                      <circle cx="32" cy="32" r="28" fill="none" stroke="#e5e7eb" strokeWidth="4"/>
-                      <circle 
-                        cx="32" cy="32" r="28" fill="none" 
+                      <circle cx="32" cy="32" r="28" fill="none" stroke="#e5e7eb" strokeWidth="4" />
+                      <circle
+                        cx="32" cy="32" r="28" fill="none"
                         stroke={type === 'phonics' ? '#4f46e5' : type === 'spelling' ? '#059669' : type === 'reading' ? '#7c3aed' : '#ea580c'}
                         strokeWidth="4"
                         strokeDasharray={`${percentage * 1.76} 176`}
@@ -188,7 +188,7 @@ export default function ProgressPage() {
                       <span className="text-sm font-bold text-gray-700">{percentage}%</span>
                     </div>
                   </div>
-                  
+
                   <div className="text-xs text-gray-600">
                     <div>{stats.completed}/{stats.total} activities</div>
                     <div className="font-medium text-green-600">{stats.accuracy}% accuracy</div>
@@ -200,13 +200,13 @@ export default function ProgressPage() {
         </motion.div>
 
         {/* Weekly Activity Chart */}
-        <motion.div 
+        <motion.div
           className="bg-white p-6 rounded-2xl shadow-lg mb-8"
           variants={itemVariants}
         >
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=40&h=40&fit=crop"
                 alt="Chart"
                 width={40}
@@ -215,15 +215,15 @@ export default function ProgressPage() {
               />
               <h2 className="text-2xl font-bold text-gray-800">This Week&apos;s Activity</h2>
             </div>
-            
+
             <div className="flex gap-2">
               {['week', 'month', 'all'].map((timeframe) => (
                 <button
                   key={timeframe}
                   onClick={() => setSelectedTimeframe(timeframe as 'week' | 'month' | 'all')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize
-                    ${selectedTimeframe === timeframe 
-                      ? 'bg-indigo-100 text-indigo-700' 
+                    ${selectedTimeframe === timeframe
+                      ? 'bg-indigo-100 text-indigo-700'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                 >
@@ -232,17 +232,17 @@ export default function ProgressPage() {
               ))}
             </div>
           </div>
-          
+
           {/* Simple Bar Chart */}
           <div className="space-y-4">
             <div className="flex items-end gap-2 h-40 px-4">
               {progressData.weeklyData.map((day) => {
                 const maxActivities = Math.max(...progressData.weeklyData.map(d => d.activities));
                 const height = (day.activities / maxActivities) * 100;
-                
+
                 return (
                   <div key={day.day} className="flex-1 flex flex-col items-center">
-                    <div 
+                    <div
                       className="w-full bg-gradient-to-t from-indigo-400 to-purple-500 rounded-t-lg transition-all duration-500 flex items-end justify-center pb-1"
                       style={{ height: `${height}%`, minHeight: day.activities > 0 ? '20px' : '0' }}
                     >
@@ -256,7 +256,7 @@ export default function ProgressPage() {
                 );
               })}
             </div>
-            
+
             <div className="text-center text-sm text-gray-600">
               Activities completed each day
             </div>
@@ -266,12 +266,12 @@ export default function ProgressPage() {
         {/* Level Journey & Recent Badges */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Level Journey */}
-          <motion.div 
+          <motion.div
             className="bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-6">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1472173148041-00294f0814a2?w=40&h=40&fit=crop"
                 alt="Journey"
                 width={40}
@@ -280,20 +280,20 @@ export default function ProgressPage() {
               />
               <h2 className="text-xl font-bold text-gray-800">Level Journey</h2>
             </div>
-            
+
             <div className="space-y-4">
               {progressData.levelMilestones.map((milestone) => (
                 <div key={milestone.level} className="flex items-center gap-4">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-white
-                    ${milestone.unlockedAt 
-                      ? 'bg-gradient-to-br from-green-400 to-emerald-500' 
+                    ${milestone.unlockedAt
+                      ? 'bg-gradient-to-br from-green-400 to-emerald-500'
                       : milestone.level === progressData.currentLevel
                         ? 'bg-gradient-to-br from-yellow-400 to-orange-500'
                         : 'bg-gray-300'
                     }`}>
                     {milestone.level}
                   </div>
-                  
+
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-gray-800">Level {milestone.level}</span>
@@ -313,28 +313,30 @@ export default function ProgressPage() {
           </motion.div>
 
           {/* Recent Badges */}
-          <motion.div 
+          <motion.div
             className="bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <Image 
+                <Image
                   src="https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=40&h=40&fit=crop"
                   alt="Badges"
+                  width={40}
+                  height={40}
                   className="w-10 h-10 rounded-full"
                 />
                 <h2 className="text-xl font-bold text-gray-800">Recent Badges</h2>
               </div>
-              
-              <Link 
-                href="/achievements" 
+
+              <Link
+                href="/achievements"
                 className="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
               >
                 View All →
               </Link>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-3">
               {recentBadges.map(badge => (
                 <div key={badge.id} className="p-3 bg-gray-50 rounded-xl text-center">
@@ -343,11 +345,11 @@ export default function ProgressPage() {
                   <div className="text-xs text-gray-500">{badge.earnedOn.toLocaleDateString()}</div>
                 </div>
               ))}
-              
+
               {recentBadges.length === 0 && (
                 <div className="col-span-2 text-center py-8">
                   <div className="text-4xl mb-2">🏆</div>
-                  <Image 
+                  <Image
                     src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=80&h=80&fit=crop"
                     alt="No badges yet"
                     width={60}
@@ -362,11 +364,11 @@ export default function ProgressPage() {
         </div>
 
         {/* Motivational Section */}
-        <motion.div 
+        <motion.div
           className="bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-500 p-8 rounded-2xl shadow-lg text-white text-center"
           variants={itemVariants}
         >
-          <Image 
+          <Image
             src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=100&h=100&fit=crop"
             alt="Celebration"
             width={96}
@@ -380,10 +382,10 @@ export default function ProgressPage() {
           <p className="text-sm opacity-75">
             Keep learning every day to maintain your {progressData.weeklyStreak}-day streak!
           </p>
-          
+
           <div className="mt-6">
-            <Link 
-              href="/activities" 
+            <Link
+              href="/activities"
               className="inline-flex items-center px-8 py-3 bg-white text-purple-600 font-bold rounded-xl hover:shadow-lg transition-all hover:scale-105"
             >
               Continue Learning

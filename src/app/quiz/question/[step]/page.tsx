@@ -81,7 +81,7 @@ export default function QuestionPage({ params }: { params: Promise<{ step: strin
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] p-6">
+    <div className="min-h-screen bg-[#F9FAFB] p-6">
       <div className="max-w-2xl mx-auto pt-8 pb-16">
         <QuizStepper currentStep={stepNumber} totalSteps={questions.length} />
         
@@ -96,7 +96,7 @@ export default function QuestionPage({ params }: { params: Promise<{ step: strin
           {stepNumber > 1 ? (
             <button 
               onClick={() => router.push(`/quiz/question/${stepNumber - 1}`)}
-              className="px-5 py-2.5 text-indigo-600 hover:text-indigo-800 flex items-center"
+              className="px-5 py-2.5 text-[#4F46E5] hover:text-[#4338CA] flex items-center"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
@@ -109,7 +109,7 @@ export default function QuestionPage({ params }: { params: Promise<{ step: strin
           
           <Link 
             href={stepNumber < questions.length ? `/quiz/question/${stepNumber + 1}` : '/quiz/results'}
-            className={`px-5 py-2.5 text-indigo-600 hover:text-indigo-800 flex items-center ${!answers[stepNumber] ? 'opacity-50 pointer-events-none' : ''}`}
+          className={`px-5 py-2.5 text-[#4F46E5] hover:text-[#4338CA] flex items-center ${!answers[stepNumber] ? 'opacity-50 pointer-events-none' : ''}`}
             aria-disabled={!answers[stepNumber]}
           >
             Skip
