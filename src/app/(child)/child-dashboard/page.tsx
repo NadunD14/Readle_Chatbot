@@ -362,7 +362,7 @@ export default function ChildDashboard() {
               />
               <div>
                 <h3 className="text-lg font-bold text-[#1F2937] mb-1">Message from Mom 💕</h3>
-                <p className="text-[#6B7280] text-sm">"Great job on your reading today! I&apos;m so proud of you!"</p>
+                <p className="text-[#6B7280] text-sm">&quot;Great job on your reading today! I&apos;m so proud of you!&quot;</p>
                 <button className="mt-2 text-[#4F46E5] text-xs font-medium hover:text-[#4338CA]">
                   Send a message back →
                 </button>

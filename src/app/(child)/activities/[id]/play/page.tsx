@@ -298,7 +298,7 @@ export default function ActivityPlayPage() {
         }, 500);
       }
     }
-  }, [gameStarted, questions, currentQuestionIndex]);
+  }, [gameStarted, questions, currentQuestionIndex, speakSlowly]);
 
   const handleGameStart = () => {
     setGameStarted(true);

@@ -204,6 +204,8 @@ const FormattedMessage = ({ content }: { content: string }) => {
     );
 };
 
+const API_BASE = (process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+
 const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<Message[]>([
         {
@@ -235,7 +237,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
 
     const initializeChat = async () => {
         try {
-            const response = await fetch('http://localhost:8000/chat/session/new', {
+            const response = await fetch(`${API_BASE}/chat/session/new`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -267,7 +269,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://localhost:8000/chat', {
+            const response = await fetch(`${API_BASE}/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -326,7 +328,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     const clearChat = async () => {
         if (sessionId) {
             try {
-                await fetch(`http://localhost:8000/chat/session/${sessionId}`, {
+                await fetch(`${API_BASE}/chat/session/${sessionId}`, {
                     method: 'DELETE'
                 });
             } catch (error) {
@@ -352,11 +354,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     return (
         <div className="h-full flex flex-col bg-white rounded-lg shadow-xl overflow-hidden">
             {/* Header */}
-<<<<<<< HEAD
-            {/* <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-3 flex items-center justify-between">
-=======
             <div className="bg-[#4F46E5] text-white px-4 py-3 flex items-center justify-between">
->>>>>>> UI
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                         <Bot className="w-4 h-4" />
@@ -366,13 +364,27 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                         <p className="text-xs text-white opacity-80">Your dyslexia support companion</p>
                     </div>
                 </div>
-                <button
-                    onClick={() => setShowSettings(!showSettings)}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                >
-                    <Settings className="w-4 h-4" />
-                </button>
-            </div> */}
+                <div className="flex items-center gap-1">
+                    <button
+                        onClick={() => setShowSettings(!showSettings)}
+                        className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                        aria-label="Chat settings"
+                        type="button"
+                    >
+                        <Settings className="w-4 h-4" />
+                    </button>
+                    {onClose && (
+                        <button
+                            onClick={onClose}
+                            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                            aria-label="Close chat"
+                            type="button"
+                        >
+                            ✕
+                        </button>
+                    )}
+                </div>
+            </div>
 
             {/* Settings Panel */}
             <AnimatePresence>
@@ -453,13 +465,13 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
                         animate={{ opacity: 1, y: 0 }}
                         className="flex gap-3 justify-start"
                     >
-                       <div className="w-8 h-8 bg-[#4F46E5] rounded-full flex items-center justify-center">
+                        <div className="w-8 h-8 bg-[#4F46E5] rounded-full flex items-center justify-center">
                             <Bot className="w-4 h-4 text-white" />
                         </div>
-                       <div className="bg-white border border-[#D1D5DB] shadow-sm p-3 rounded-2xl rounded-bl-md">
+                        <div className="bg-white border border-[#D1D5DB] shadow-sm p-3 rounded-2xl rounded-bl-md">
                             <div className="flex items-center gap-2">
-                               <Loader2 className="w-4 h-4 animate-spin text-[#4F46E5]" />
-                               <span className="text-sm text-[#6B7280]">Thinking...</span>
+                                <Loader2 className="w-4 h-4 animate-spin text-[#4F46E5]" />
+                                <span className="text-sm text-[#6B7280]">Thinking...</span>
                             </div>
                         </div>
                     </motion.div>

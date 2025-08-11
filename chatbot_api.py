@@ -120,7 +120,7 @@ class RAGSystem:
             try:
                 print(f"Loading PDF: {pdf_file}")
                 loader = PyPDFLoader(pdf_file)
-                pdf_docs = loader.load()
+                pdf_docs = loader.load()[:1]
                 
                 for doc in pdf_docs:
                     doc.metadata.update({
@@ -160,7 +160,6 @@ class RAGSystem:
         return documents
     
     async def initialize_vectorstore(self, urls: List[str] = None, include_pdfs: bool = True):
-        """Initialize the vector store with website content and PDFs"""
         if urls is None:
             urls = self.default_websites
         
@@ -169,38 +168,39 @@ class RAGSystem:
             
             if include_pdfs:
                 pdf_documents = await self.load_pdfs_from_folder()
-                all_documents.extend(pdf_documents)
                 print(f"Loaded {len(pdf_documents)} PDF documents")
+                all_documents.extend(pdf_documents)
             
+            print("Starting to load websites...")
             web_documents = await self.load_websites(urls)
+            print(f"Finished loading {len(web_documents)} web documents")
             all_documents.extend(web_documents)
-            print(f"Loaded {len(web_documents)} web documents")
             
             if not all_documents:
                 print("No documents loaded, using fallback content")
                 fallback_content = self._create_fallback_content()
                 all_documents = [Document(page_content=content, metadata={"source": "fallback", "source_type": "fallback"}) for content in fallback_content]
             
+            print("Starting document splitting...")
             text_splitter = RecursiveCharacterTextSplitter(
                 chunk_size=500,
                 chunk_overlap=50,
                 length_function=len
             )
             splits = text_splitter.split_documents(all_documents)
+            print(f"Created {len(splits)} document chunks")
             
+            print("Starting embedding generation and vector store creation...")
             self.vectorstore = Chroma.from_documents(
                 documents=splits,
                 embedding=self.embeddings,
                 persist_directory="./chroma_db"
             )
+            print("Vector store created successfully")
             
-            # Enhanced retriever with similarity scores
             self.retriever = self.vectorstore.as_retriever(
                 search_type="similarity_score_threshold",
-                search_kwargs={
-                    "k": 5,  # Get more results to evaluate
-                    "score_threshold": 0.5  # Lower threshold for initial filtering
-                }
+                search_kwargs={"k": 5, "score_threshold": 0.5}
             )
             
             print(f"RAG system initialized with {len(splits)} document chunks")
@@ -209,7 +209,7 @@ class RAGSystem:
         except Exception as e:
             print(f"Error initializing RAG system: {e}")
             return False
-    
+        
     def _create_fallback_content(self) -> List[str]:
         """Create fallback content when websites can't be loaded"""
         return [
@@ -329,9 +329,19 @@ groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 # Initialize FastAPI app
 app = FastAPI(title="Readle Chatbot API", version="2.1.0")
 
+# Configure CORS for local dev and optionally a deployed frontend
+cors_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+# Allow comma-separated origins via env (e.g., https://your-app.vercel.app,https://preview.vercel.app)
+extra_origins = os.getenv("ALLOWED_ORIGINS")
+if extra_origins:
+    cors_origins.extend([o.strip() for o in extra_origins.split(",") if o.strip()])
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
