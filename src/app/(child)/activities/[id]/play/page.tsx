@@ -34,13 +34,13 @@ const GamePlayArea: React.FC<{
 
   const handleOptionClick = (optionId: string) => {
     if (answered) return;
-    
+
     setSelectedOption(optionId);
     setShowFeedback(true);
     setAnswered(true);
-    
+
     const isCorrect = options.find(opt => opt.id === optionId)?.isCorrect || false;
-    
+
     setTimeout(() => {
       onComplete(isCorrect);
     }, 1500);
@@ -50,17 +50,17 @@ const GamePlayArea: React.FC<{
     if (!showFeedback) {
       return "bg-white hover:bg-indigo-50 border-2 border-indigo-200 hover:border-indigo-300";
     }
-    
+
     if (option.id === selectedOption) {
-      return option.isCorrect 
+      return option.isCorrect
         ? "bg-green-100 border-2 border-green-400 text-green-800"
         : "bg-red-100 border-2 border-red-400 text-red-800";
     }
-    
+
     if (option.isCorrect) {
       return "bg-green-100 border-2 border-green-400 text-green-800";
     }
-    
+
     return "bg-gray-100 border-2 border-gray-300 text-gray-500";
   };
 
@@ -74,28 +74,26 @@ const GamePlayArea: React.FC<{
       </div>
 
       {/* Options */}
-      <div className={`grid gap-4 ${
-        layout === 'grid' && options.length <= 4 
-          ? options.length === 2 ? 'grid-cols-1 md:grid-cols-2' 
+      <div className={`grid gap-4 ${layout === 'grid' && options.length <= 4
+          ? options.length === 2 ? 'grid-cols-1 md:grid-cols-2'
             : options.length === 3 ? 'grid-cols-1 md:grid-cols-3'
-            : 'grid-cols-1 md:grid-cols-2'
+              : 'grid-cols-1 md:grid-cols-2'
           : 'grid-cols-1'
-      }`}>
+        }`}>
         {options.map((option) => (
           <motion.button
             key={option.id}
             onClick={() => handleOptionClick(option.id)}
             disabled={answered}
-            className={`p-6 rounded-xl transition-all duration-200 ${getOptionStyle(option)} ${
-              answered ? 'cursor-default' : 'cursor-pointer hover:scale-105'
-            }`}
+            className={`p-6 rounded-xl transition-all duration-200 ${getOptionStyle(option)} ${answered ? 'cursor-default' : 'cursor-pointer hover:scale-105'
+              }`}
             whileHover={!answered ? { scale: 1.02 } : {}}
             whileTap={!answered ? { scale: 0.98 } : {}}
           >
             {option.imageUrl && (
               <div className="mb-4 relative h-32">
-                <Image 
-                  src={option.imageUrl} 
+                <Image
+                  src={option.imageUrl}
                   alt={option.text}
                   className="w-full h-full object-cover rounded-lg"
                   fill
@@ -104,7 +102,7 @@ const GamePlayArea: React.FC<{
               </div>
             )}
             <span className="text-lg font-medium">{option.text}</span>
-            
+
             {showFeedback && option.id === selectedOption && (
               <div className="mt-2">
                 {option.isCorrect ? (
@@ -125,11 +123,10 @@ const GamePlayArea: React.FC<{
           animate={{ opacity: 1, y: 0 }}
           className="mt-6 text-center"
         >
-          <div className={`inline-flex items-center px-4 py-2 rounded-full ${
-            options.find(opt => opt.id === selectedOption)?.isCorrect
+          <div className={`inline-flex items-center px-4 py-2 rounded-full ${options.find(opt => opt.id === selectedOption)?.isCorrect
               ? 'bg-green-100 text-green-800'
               : 'bg-red-100 text-red-800'
-          }`}>
+            }`}>
             {options.find(opt => opt.id === selectedOption)?.isCorrect ? (
               <>
                 <span className="mr-2">🎉</span>
@@ -153,7 +150,7 @@ export default function ActivityPlayPage() {
   const router = useRouter();
   const { speak, speakSlowly } = useTTS();
   const id = typeof params.id === 'string' ? params.id : '';
-  
+
   const [activity, setActivity] = useState<Activity | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -279,11 +276,11 @@ export default function ActivityPlayPage() {
     if (id) {
       const activityData = childActivities.find(act => act.id === id);
       setActivity(activityData || null);
-      
+
       if (activityData) {
         setQuestions(generateQuestions(activityData));
       }
-      
+
       setLoading(false);
     }
   }, [id]);
@@ -309,9 +306,9 @@ export default function ActivityPlayPage() {
     if (correct) {
       setScore(score + 1);
     }
-    
+
     setQuestionsAnswered(questionsAnswered + 1);
-    
+
     // Move to next question or complete
     if (currentQuestionIndex < questions.length - 1) {
       setTimeout(() => {
@@ -324,7 +321,7 @@ export default function ActivityPlayPage() {
       }, 1500);
     }
   };
-  
+
   const currentQuestion = questions[currentQuestionIndex];
 
   // Show loading state
@@ -346,8 +343,8 @@ export default function ActivityPlayPage() {
         <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 text-center">
           <h1 className="text-2xl font-bold text-red-500 mb-4">Activity Not Found</h1>
           <p className="mb-6">Sorry, we couldn&apos;t find this activity.</p>
-          <Link 
-            href="/child-dashboard" 
+          <Link
+            href="/child-dashboard"
             className="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors inline-block"
           >
             Back to Dashboard
@@ -361,7 +358,7 @@ export default function ActivityPlayPage() {
   if (!gameStarted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-[#f8f4ff] to-[#eef9ff] py-8 px-6 flex items-center justify-center">
-        <motion.div 
+        <motion.div
           className="max-w-2xl w-full bg-white rounded-3xl shadow-xl overflow-hidden"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -369,44 +366,44 @@ export default function ActivityPlayPage() {
         >
           {activity.thumbnailUrl && (
             <div className="h-48 w-full relative">
-              <Image 
-                src={activity.thumbnailUrl} 
-                alt={activity.title} 
+              <Image
+                src={activity.thumbnailUrl}
+                alt={activity.title}
                 className="w-full h-full object-cover"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           )}
-          
+
           <div className="p-8">
             <div className="flex justify-between items-start mb-6">
-              <Badge 
-                text={activity.type} 
-                type="achievement" 
+              <Badge
+                text={activity.type}
+                type="achievement"
                 size="small"
               />
-              <Badge 
-                text={activity.difficulty} 
-                type="level" 
+              <Badge
+                text={activity.difficulty}
+                type="level"
                 size="small"
               />
             </div>
-            
+
             <h1 className="text-3xl font-bold mb-4 text-gray-800">{activity.title}</h1>
             <p className="text-gray-600 mb-8">{activity.description}</p>
-            
+
             <div className="bg-indigo-50 p-4 rounded-xl mb-8 flex items-start">
               <span className="text-xl mr-3">💡</span>
               <div>
                 <h3 className="font-bold text-indigo-700 mb-1">Instructions</h3>
                 <p className="text-indigo-600 text-sm">
-                  {questions[0]?.instructions || 
-                   "Listen carefully, read the questions, and select the correct answers. Have fun!"}
+                  {questions[0]?.instructions ||
+                    "Listen carefully, read the questions, and select the correct answers. Have fun!"}
                 </p>
-                <AudioButton 
-                  text={questions[0]?.instructions || 
-                        "Listen carefully, read the questions, and select the correct answers. Have fun!"}
+                <AudioButton
+                  text={questions[0]?.instructions ||
+                    "Listen carefully, read the questions, and select the correct answers. Have fun!"}
                   variant="secondary"
                   size="small"
                   className="mt-2"
@@ -414,15 +411,15 @@ export default function ActivityPlayPage() {
                 />
               </div>
             </div>
-            
+
             <div className="flex gap-4">
-              <Link 
-                href={`/activities/${id}`} 
+              <Link
+                href={`/activities/${id}`}
                 className="px-6 py-3 border-2 border-indigo-200 text-indigo-600 rounded-xl hover:bg-indigo-50 transition-colors"
               >
                 Back
               </Link>
-              <button 
+              <button
                 onClick={handleGameStart}
                 className="flex-1 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-lg transition-all"
               >
@@ -441,7 +438,7 @@ export default function ActivityPlayPage() {
       <div className="max-w-4xl mx-auto">
         {/* Simple top bar with minimal info */}
         <div className="mb-6 flex justify-between items-center">
-          <Link 
+          <Link
             href={`/activities/${id}`}
             className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors text-sm"
           >
@@ -450,7 +447,7 @@ export default function ActivityPlayPage() {
             </svg>
             Exit
           </Link>
-          
+
           <div className="flex items-center gap-4">
             <span className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">
               {currentQuestionIndex + 1}/{questions.length}
@@ -464,7 +461,7 @@ export default function ActivityPlayPage() {
         {/* Audio controls outside the game area */}
         {currentQuestion && (
           <div className="mb-4 flex justify-center gap-3">
-            <AudioButton 
+            <AudioButton
               text={currentQuestion.question}
               size="medium"
               variant="primary"
@@ -472,7 +469,7 @@ export default function ActivityPlayPage() {
               label="🔊 Listen to Question"
             />
             {currentQuestion.instructions && (
-              <AudioButton 
+              <AudioButton
                 text={currentQuestion.instructions}
                 size="medium"
                 variant="secondary"
@@ -482,7 +479,7 @@ export default function ActivityPlayPage() {
             )}
           </div>
         )}
-        
+
         {/* Game area */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -502,18 +499,17 @@ export default function ActivityPlayPage() {
             )}
           </motion.div>
         </AnimatePresence>
-        
+
         {/* Progress indicator */}
         <div className="mt-6 flex justify-center">
           <div className="flex items-center gap-1">
             {Array.from({ length: questions.length }).map((_, idx) => (
-              <div 
-                key={idx} 
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  idx === currentQuestionIndex ? 'bg-indigo-600' : 
-                  idx < currentQuestionIndex ? 'bg-green-400' : 
-                  'bg-gray-300'
-                }`}
+              <div
+                key={idx}
+                className={`w-3 h-3 rounded-full transition-colors ${idx === currentQuestionIndex ? 'bg-indigo-600' :
+                    idx < currentQuestionIndex ? 'bg-green-400' :
+                      'bg-gray-300'
+                  }`}
               />
             ))}
           </div>

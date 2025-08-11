@@ -14,13 +14,13 @@ export default function ChildDashboard() {
   const [currentStreak] = useState(7);
   const [weeklyGoal] = useState(5);
   const [completedToday] = useState(2);
-  
+
   // Get recent badges
   const recentBadges = getRecentBadges().slice(0, 4);
-  
+
   // Calculate weekly progress
   const weeklyProgress = Math.min((completedToday / weeklyGoal) * 100, 100);
-  
+
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1 }
@@ -42,13 +42,13 @@ export default function ChildDashboard() {
         className="max-w-7xl mx-auto"
       >
         {/* Today's Challenge */}
-        <motion.div 
+        <motion.div
           className="bg-[#4F46E5] p-6 rounded-2xl shadow-lg mb-8 text-white"
           variants={itemVariants}
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-4">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=200&fit=crop"
                 alt="Challenge trophy"
                 width={64}
@@ -61,8 +61,8 @@ export default function ChildDashboard() {
                 <p className="text-sm opacity-75 mt-1">+50 bonus stars for completion today</p>
               </div>
             </div>
-            <Link 
-              href="/activities/act-004" 
+            <Link
+              href="/activities/act-004"
               className="px-6 py-3 bg-white text-[#4F46E5] font-bold rounded-xl hover:shadow-lg transition-all hover:scale-105"
             >
               Start Challenge
@@ -72,7 +72,7 @@ export default function ChildDashboard() {
         {/* Welcome Header with Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Welcome Message */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
@@ -92,7 +92,7 @@ export default function ChildDashboard() {
           </motion.div>
 
           {/* Quick Stats */}
-          <motion.div 
+          <motion.div
             className="bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
@@ -117,12 +117,12 @@ export default function ChildDashboard() {
         {/* Progress & Goals Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Level Progress */}
-          <motion.div 
+          <motion.div
             className="bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-4">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=40&h=40&fit=crop"
                 alt="Progress icon"
                 width={40}
@@ -132,7 +132,7 @@ export default function ChildDashboard() {
               <h2 className="text-xl font-bold text-gray-800">Level Progress</h2>
             </div>
             <ProgressBar progress={CHILD.progress} level={CHILD.level} theme="rainbow" />
-            
+
             {CHILD.progress >= 90 && (
               <div className="mt-4 bg-[#FEF3C7] p-4 rounded-xl border border-[#FDE68A] flex items-center">
                 <span className="text-2xl mr-3">🎉</span>
@@ -144,12 +144,12 @@ export default function ChildDashboard() {
           </motion.div>
 
           {/* Weekly Goal */}
-          <motion.div 
+          <motion.div
             className="bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-4">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=40&h=40&fit=crop"
                 alt="Goal icon"
                 width={40}
@@ -158,10 +158,10 @@ export default function ChildDashboard() {
               />
               <h2 className="text-xl font-bold text-[#1F2937]">This Week&apos;s Goal</h2>
             </div>
-            
+
             <div className="relative">
               <div className="h-4 bg-[#D1FAE5] rounded-full overflow-hidden">
-                <div 
+                <div
                   className="h-full bg-[#10B981] rounded-full transition-all duration-500"
                   style={{ width: `${weeklyProgress}%` }}
                 />
@@ -182,7 +182,7 @@ export default function ChildDashboard() {
 
 
         {/* Activity Categories */}
-        <motion.div 
+        <motion.div
           className="mb-8"
           variants={itemVariants}
         >
@@ -194,7 +194,7 @@ export default function ChildDashboard() {
               { type: 'reading', icon: '📚', color: 'bg-[#F59E0B]', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=200&fit=crop' },
               { type: 'comprehension', icon: '🧩', color: 'bg-[#3B82F6]', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=300&h=200&fit=crop' }
             ].map((category) => (
-              <Link 
+              <Link
                 key={category.type}
                 href={`/activities?type=${category.type}`}
                 className="group"
@@ -205,7 +205,7 @@ export default function ChildDashboard() {
                     <h3 className="font-bold capitalize text-lg">{category.type}</h3>
                   </div>
                   <div className="h-24 overflow-hidden">
-                    <Image 
+                    <Image
                       src={category.image}
                       alt={category.type}
                       width={300}
@@ -222,12 +222,12 @@ export default function ChildDashboard() {
         {/* Continue Learning & Recent Achievements */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Continue Learning */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-6">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1472173148041-00294f0814a2?w=40&h=40&fit=crop"
                 alt="Continue learning"
                 width={40}
@@ -236,7 +236,7 @@ export default function ChildDashboard() {
               />
               <h2 className="text-xl font-bold text-[#1F2937]">Continue Learning</h2>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {childActivities.slice(0, 4).map(activity => (
                 <ActivityCard
@@ -246,24 +246,23 @@ export default function ChildDashboard() {
                   type={activity.type}
                   difficulty={activity.difficulty}
                   description={activity.description}
-                  imageUrl={`https://images.unsplash.com/photo-${
-                    activity.type === 'phonics' ? '1503676260728-1c00da094a0b' :
-                    activity.type === 'spelling' ? '1455390582262-044cdead277a' :
-                    activity.type === 'reading' ? '1481627834876-b7833e8f5570' :
-                    '1606092195730-5d7b9af1efc5'
-                  }?w=400&h=250&fit=crop`}
+                  imageUrl={`https://images.unsplash.com/photo-${activity.type === 'phonics' ? '1503676260728-1c00da094a0b' :
+                      activity.type === 'spelling' ? '1455390582262-044cdead277a' :
+                        activity.type === 'reading' ? '1481627834876-b7833e8f5570' :
+                          '1606092195730-5d7b9af1efc5'
+                    }?w=400&h=250&fit=crop`}
                   completedPercentage={
                     todayActivities.find(a => a.id === activity.id)?.completed ? 100 :
-                    Math.random() > 0.7 ? Math.floor(Math.random() * 80) : 0
+                      Math.random() > 0.7 ? Math.floor(Math.random() * 80) : 0
                   }
                   isNew={activity.id === 'act-001' || activity.id === 'act-008'}
                 />
               ))}
             </div>
-            
+
             <div className="mt-4 text-center">
-              <Link 
-                href="/activities" 
+              <Link
+                href="/activities"
                 className="inline-flex items-center px-6 py-3 bg-[#4F46E5] text-white font-medium rounded-xl hover:bg-[#4338CA] transition-colors"
               >
                 View All Activities
@@ -275,12 +274,12 @@ export default function ChildDashboard() {
           </motion.div>
 
           {/* Recent Achievements */}
-          <motion.div 
+          <motion.div
             className="bg-white p-6 rounded-2xl shadow-lg"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-4">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=40&h=40&fit=crop"
                 alt="Achievements"
                 width={40}
@@ -289,7 +288,7 @@ export default function ChildDashboard() {
               />
               <h2 className="text-xl font-bold text-[#1F2937]">Latest Badges</h2>
             </div>
-            
+
             <div className="space-y-3">
               {recentBadges.map(badge => (
                 <div key={badge.id} className="flex items-center gap-3 p-3 bg-[#F3F4F6] rounded-xl">
@@ -300,10 +299,10 @@ export default function ChildDashboard() {
                   </div>
                 </div>
               ))}
-              
+
               {recentBadges.length === 0 && (
                 <div className="text-center py-8">
-                  <Image 
+                  <Image
                     src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=80&h=80&fit=crop"
                     alt="No badges yet"
                     width={64}
@@ -314,9 +313,9 @@ export default function ChildDashboard() {
                 </div>
               )}
             </div>
-            
-            <Link 
-              href="/achievements" 
+
+            <Link
+              href="/achievements"
               className="block mt-4 text-center text-[#4F46E5] hover:text-[#4338CA] text-sm font-medium"
             >
               View All Achievements →
@@ -327,12 +326,12 @@ export default function ChildDashboard() {
         {/* Learning Streak & Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Learning Streak */}
-          <motion.div 
+          <motion.div
             className="bg-[#10B981] p-6 rounded-2xl shadow-lg text-white"
             variants={itemVariants}
           >
             <div className="flex items-center gap-4">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=80&h=80&fit=crop"
                 alt="Fire streak"
                 width={64}
@@ -348,12 +347,12 @@ export default function ChildDashboard() {
           </motion.div>
 
           {/* Parent Connection */}
-          <motion.div 
+          <motion.div
             className="bg-white p-6 rounded-2xl shadow-lg border-2 border-[#F3F4F6]"
             variants={itemVariants}
           >
             <div className="flex items-center gap-4">
-              <Image 
+              <Image
                 src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=80&h=80&fit=crop"
                 alt="Parent message"
                 width={64}
