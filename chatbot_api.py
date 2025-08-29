@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from groq import Groq
 from langchain_community.embeddings import OllamaEmbeddings
+from langchain.embeddings import FakeEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import WebBaseLoader, PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -93,7 +94,15 @@ class ChatMemory:
 # Enhanced RAG System with relevance scoring
 class RAGSystem:
     def __init__(self, relevance_threshold: float = 0.7):
-        self.embeddings = OllamaEmbeddings(model="llama2")
+        # Try to initialize Ollama embeddings; fallback to a lightweight fake embedding for local dev
+        self.embeddings = None
+        try:
+            if os.getenv("DISABLE_RAG", "false").lower() != "true":
+                self.embeddings = OllamaEmbeddings(model=os.getenv("OLLAMA_MODEL", "llama2"))
+        except Exception as e:
+            print(f"Warning: Ollama embeddings unavailable ({e}). Falling back to fake embeddings; RAG quality reduced.")
+            # FakeEmbeddings: deterministic small vectors just so vectorstore API doesn't crash
+            self.embeddings = FakeEmbeddings(size=384)
         self.vectorstore = None
         self.retriever = None
         self.websites_content = []
@@ -160,13 +169,16 @@ class RAGSystem:
         return documents
     
     async def initialize_vectorstore(self, urls: List[str] = None, include_pdfs: bool = True):
+        if os.getenv("DISABLE_RAG", "false").lower() == "true":
+            print("RAG disabled via DISABLE_RAG env var. Skipping vectorstore initialization.")
+            return False
         if urls is None:
             urls = self.default_websites
         
         try:
             all_documents = []
             
-            if include_pdfs:
+            if include_pdfs and os.getenv("INCLUDE_PDFS", "true").lower() == "true":
                 pdf_documents = await self.load_pdfs_from_folder()
                 print(f"Loaded {len(pdf_documents)} PDF documents")
                 all_documents.extend(pdf_documents)
@@ -194,7 +206,7 @@ class RAGSystem:
             self.vectorstore = Chroma.from_documents(
                 documents=splits,
                 embedding=self.embeddings,
-                persist_directory="./chroma_db"
+                persist_directory=os.getenv("CHROMA_DIR", "./chroma_db")
             )
             print("Vector store created successfully")
             
@@ -322,7 +334,7 @@ class RAGSystem:
         return content
 
 # Initialize systems
-rag_system = RAGSystem(relevance_threshold=0.6)  # Adjust threshold as needed
+rag_system = RAGSystem(relevance_threshold=float(os.getenv("RAG_THRESHOLD", "0.6")))  # Adjust threshold via env
 chat_memory = ChatMemory()
 groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
@@ -330,22 +342,32 @@ groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 app = FastAPI(title="Readle Chatbot API", version="2.1.0")
 
 # Configure CORS for local dev and optionally a deployed frontend
-cors_origins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
-# Allow comma-separated origins via env (e.g., https://your-app.vercel.app,https://preview.vercel.app)
-extra_origins = os.getenv("ALLOWED_ORIGINS")
+cors_origins = []
+default_local_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+cors_origins.extend(default_local_origins)
+
+extra_origins = os.getenv("ALLOWED_ORIGINS", "")
 if extra_origins:
     cors_origins.extend([o.strip() for o in extra_origins.split(",") if o.strip()])
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=cors_origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+origin_regex = os.getenv("ALLOWED_ORIGIN_REGEX")  # e.g. https://.*\.ngrok-free\.app
+
+if origin_regex:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origin_regex=origin_regex,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+else:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=cors_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 # Pydantic models
 class ChatRequest(BaseModel):
@@ -635,7 +657,10 @@ async def health_check():
         "service": "Readle Chatbot API v2.1 with Improved Response Handling",
         "active_sessions": active_sessions,
         "rag_initialized": rag_system.retriever is not None,
-        "relevance_threshold": rag_system.relevance_threshold
+    "relevance_threshold": rag_system.relevance_threshold,
+    "rag_disabled": os.getenv("DISABLE_RAG", "false"),
+    "include_pdfs": os.getenv("INCLUDE_PDFS", "true"),
+    "chroma_dir": os.getenv("CHROMA_DIR", "./chroma_db")
     }
 
 # RAG Management endpoints
@@ -723,4 +748,5 @@ async def startup_event():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run(app, host="0.0.0.0", port=port)

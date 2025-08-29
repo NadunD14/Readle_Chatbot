@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Bot, User, Loader2, Settings, Trash2 } from 'lucide-react';
+import { API_BASE_URL, createChatSession, sendChatMessage, clearChatSession, logApiConfig } from '@/lib/api';
 
 interface Message {
     id: string;
@@ -204,7 +205,8 @@ const FormattedMessage = ({ content }: { content: string }) => {
     );
 };
 
-const API_BASE = (process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+// Use centralized API configuration
+const API_BASE = API_BASE_URL;
 
 const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState<Message[]>([
@@ -232,22 +234,15 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     useEffect(() => {
         if (isOpen) {
             initializeChat();
+            // Log API configuration in development
+            logApiConfig();
         }
     }, [isOpen]);
 
     const initializeChat = async () => {
         try {
-            const response = await fetch(`${API_BASE}/chat/session/new`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setSessionId(data.session_id);
-            }
+            const data = await createChatSession();
+            setSessionId(data.session_id);
         } catch (error) {
             console.error('Error creating session:', error);
         }
@@ -269,24 +264,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
         setIsLoading(true);
 
         try {
-            const response = await fetch(`${API_BASE}/chat`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: currentMessage,
-                    session_id: sessionId,
-                    use_rag: true // Always use RAG for enhanced knowledge
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || 'Failed to get response from chatbot');
-            }
-
-            const data = await response.json();
+            const data = await sendChatMessage(currentMessage, sessionId || undefined);
 
             // Update session ID if it changed
             if (data.session_id && data.session_id !== sessionId) {
@@ -304,11 +282,26 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
             setMessages(prev => [...prev, botMessage]);
         } catch (error) {
             console.error('Error sending message:', error);
+
+            // Enhanced error handling with connection-specific messages
+            let errorContent = "Sorry, I'm having trouble connecting right now.";
+
+            if (error instanceof Error) {
+                if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    errorContent = `Unable to connect to the chat service at ${API_BASE}. Please check:
+• The backend server is running (uvicorn chatbot_api:app --host 0.0.0.0 --port 8000)
+• Your GROQ_API_KEY is set correctly
+• If using ngrok, make sure the tunnel URL is updated in your environment variables`;
+                } else if (error.message.includes('GROQ_API_KEY')) {
+                    errorContent = `API Key Error: ${error.message}. Please check your GROQ_API_KEY environment variable.`;
+                } else {
+                    errorContent = `Connection Error: ${error.message}`;
+                }
+            }
+
             const errorMessage: Message = {
                 id: (Date.now() + 1).toString(),
-                content: error instanceof Error
-                    ? `Sorry, I encountered an error: ${error.message}. Please check your GROQ_API_KEY and try again.`
-                    : "Sorry, I'm having trouble connecting right now. Please make sure the API service is running and try again.",
+                content: errorContent,
                 sender: 'bot',
                 timestamp: new Date()
             };
@@ -328,9 +321,7 @@ const ReadleChatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
     const clearChat = async () => {
         if (sessionId) {
             try {
-                await fetch(`${API_BASE}/chat/session/${sessionId}`, {
-                    method: 'DELETE'
-                });
+                await clearChatSession(sessionId);
             } catch (error) {
                 console.error('Error clearing session:', error);
             }
