@@ -8,6 +8,32 @@
  * For local development, the API will default to http://localhost:8000
  */
 
+// Type definitions for API responses
+interface CreateSessionResponse {
+    session_id: string;
+    message: string;
+}
+
+interface ChatResponse {
+    response: string;
+    session_id: string;
+    sources_used?: boolean;
+    relevance_score?: number;
+    reasoning?: string;
+    response_type?: string;
+}
+
+interface HealthResponse {
+    status: string;
+    service: string;
+    active_sessions: number;
+    rag_initialized: boolean;
+    relevance_threshold: number;
+    rag_disabled: string;
+    include_pdfs: string;
+    chroma_dir: string;
+}
+
 // Get the API base URL with fallback chain
 export const getApiBaseUrl = (): string => {
     // Priority order: NEXT_PUBLIC_API_BASE_URL > NEXT_PUBLIC_CHAT_API_URL > localhost fallback
@@ -30,7 +56,7 @@ export const API_ENDPOINTS = {
 } as const;
 
 // API utility functions
-export const createChatSession = async (): Promise<{ session_id: string; message: string }> => {
+export const createChatSession = async (): Promise<CreateSessionResponse> => {
     const response = await fetch(API_ENDPOINTS.newSession, {
         method: 'POST',
         headers: {
@@ -45,7 +71,7 @@ export const createChatSession = async (): Promise<{ session_id: string; message
     return response.json();
 };
 
-export const sendChatMessage = async (message: string, sessionId?: string) => {
+export const sendChatMessage = async (message: string, sessionId?: string): Promise<ChatResponse> => {
     const response = await fetch(API_ENDPOINTS.chat, {
         method: 'POST',
         headers: {
@@ -74,7 +100,7 @@ export const clearChatSession = async (sessionId: string): Promise<void> => {
     }
 };
 
-export const checkApiHealth = async (): Promise<any> => {
+export const checkApiHealth = async (): Promise<HealthResponse> => {
     const response = await fetch(API_ENDPOINTS.health);
 
     if (!response.ok) {
