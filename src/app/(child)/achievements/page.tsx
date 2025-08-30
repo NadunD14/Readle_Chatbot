@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import Badge from '@/components/ui/Badge';
 import { childBadges, Badge as BadgeType, getBadgesByCategory } from '@/lib/childBadges';
 
 export default function AchievementsPage() {

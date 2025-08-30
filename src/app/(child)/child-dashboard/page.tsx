@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import ProgressBar from '@/components/ui/ProgressBar';
-import ActivityCard from '@/components/ui/ActivityCard';
 import { CHILD } from '@/lib/constants';
 import { childActivities } from '@/lib/childActivities';
 import { getRecentBadges } from '@/lib/childBadges';
@@ -250,7 +249,7 @@ export default function ChildDashboard() {
 
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {childActivities.slice(0, 4).map((activity, index) => {
+                {childActivities.slice(0, 4).map((activity) => {
                   const completedActivity = todayActivities.find(a => a.id === activity.id);
                   const completedPercentage = completedActivity?.completed ? 100 : Math.random() > 0.7 ? Math.floor(Math.random() * 80) : 0;
 

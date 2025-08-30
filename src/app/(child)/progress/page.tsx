@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import ProgressBar from '@/components/ui/ProgressBar';
 import { CHILD } from '@/lib/constants';
 import { getRecentBadges } from '@/lib/childBadges';
-import Image from 'next/image';
 
 export default function ProgressPage() {
   const [selectedTimeframe, setSelectedTimeframe] = useState<'week' | 'month' | 'all'>('week');

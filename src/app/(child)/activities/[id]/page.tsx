@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import Badge from '@/components/ui/Badge';
 import AudioButton from '@/components/ui/AudioButton';
 import { useTTS } from '@/hooks/useTTS';
 import { childActivities, Activity } from '@/lib/childActivities';
