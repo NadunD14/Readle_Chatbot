@@ -43,7 +43,7 @@ export default function ChildDashboard() {
       >
         {/* Today's Challenge */}
         <motion.div
-          className="bg-[#4F46E5] p-6 rounded-2xl shadow-lg mb-8 text-white"
+          className="bg-gradient-to-br from-[#4F46E5] to-[#6366F1] border border-[#C7D2FE] p-6 rounded-2xl shadow-sm mb-8 text-white"
           variants={itemVariants}
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -73,7 +73,7 @@ export default function ChildDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Welcome Message */}
           <motion.div
-            className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg"
+            className="lg:col-span-2 bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] border border-gray-100 p-6 rounded-2xl shadow-sm"
             variants={itemVariants}
           >
             <div className="flex items-center gap-4">
@@ -93,7 +93,7 @@ export default function ChildDashboard() {
 
           {/* Quick Stats */}
           <motion.div
-            className="bg-white p-6 rounded-2xl shadow-lg"
+            className="bg-gradient-to-br from-[#F8FAFC] to-[#E0E7FF] border border-gray-100 p-6 rounded-2xl shadow-sm"
             variants={itemVariants}
           >
             <h3 className="text-lg font-bold text-[#1F2937] mb-4">Today&apos;s Stats</h3>
@@ -118,7 +118,7 @@ export default function ChildDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Level Progress */}
           <motion.div
-            className="bg-white p-6 rounded-2xl shadow-lg"
+            className="bg-gradient-to-br from-[#F8FAFC] to-[#E0E7FF] border border-gray-100 p-6 rounded-2xl shadow-sm"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -134,7 +134,7 @@ export default function ChildDashboard() {
             <ProgressBar progress={CHILD.progress} level={CHILD.level} theme="rainbow" />
 
             {CHILD.progress >= 90 && (
-              <div className="mt-4 bg-[#FEF3C7] p-4 rounded-xl border border-[#FDE68A] flex items-center">
+              <div className="mt-4 bg-gradient-to-br from-[#FEF3C7] to-[#FDE68A] p-4 rounded-xl border border-[#FDE68A] flex items-center">
                 <span className="text-2xl mr-3">🎉</span>
                 <p className="text-sm text-[#1F2937] font-medium">
                   Almost there! One more activity to level up!
@@ -145,7 +145,7 @@ export default function ChildDashboard() {
 
           {/* Weekly Goal */}
           <motion.div
-            className="bg-white p-6 rounded-2xl shadow-lg"
+            className="bg-gradient-to-br from-[#F8FAFC] to-[#E0E7FF] border border-gray-100 p-6 rounded-2xl shadow-sm"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -186,32 +186,40 @@ export default function ChildDashboard() {
           className="mb-8"
           variants={itemVariants}
         >
-          <h2 className="text-2xl font-bold text-[#1F2937] mb-6">Choose Your Adventure</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-1 h-8 bg-gradient-to-b from-[#4F46E5] to-[#3B82F6] rounded-full"></div>
+            <h2 className="text-2xl font-bold text-[#1F2937]">Learning Categories</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { type: 'phonics', icon: '🔤', color: 'bg-[#4F46E5]', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&h=200&fit=crop' },
-              { type: 'spelling', icon: '✏️', color: 'bg-[#10B981]', image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&h=200&fit=crop' },
-              { type: 'reading', icon: '📚', color: 'bg-[#F59E0B]', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=200&fit=crop' },
-              { type: 'comprehension', icon: '🧩', color: 'bg-[#3B82F6]', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=300&h=200&fit=crop' }
+              { type: 'phonics', icon: '🔤', color: 'from-[#4F46E5] to-[#6366F1]', accent: 'border-[#4F46E5]', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&h=200&fit=crop' },
+              { type: 'spelling', icon: '✏️', color: 'from-[#10B981] to-[#14B8A6]', accent: 'border-[#10B981]', image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=300&h=200&fit=crop' },
+              { type: 'reading', icon: '📚', color: 'from-[#F59E0B] to-[#F97316]', accent: 'border-[#F59E0B]', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&h=200&fit=crop' },
+              { type: 'comprehension', icon: '🧩', color: 'from-[#3B82F6] to-[#2563EB]', accent: 'border-[#3B82F6]', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=300&h=200&fit=crop' }
             ].map((category) => (
               <Link
                 key={category.type}
                 href={`/activities?type=${category.type}`}
                 className="group"
               >
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all group-hover:scale-105">
-                  <div className={`${category.color} p-6 text-white text-center`}>
-                    <span className="text-4xl mb-2 block">{category.icon}</span>
-                    <h3 className="font-bold capitalize text-lg">{category.type}</h3>
-                  </div>
-                  <div className="h-24 overflow-hidden">
+                <div className="bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] border border-gray-100 rounded-xl hover:border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 group-hover:-translate-y-1 overflow-hidden">
+                  <div className="relative h-32 overflow-hidden">
                     <Image
                       src={category.image}
                       alt={category.type}
                       width={300}
                       height={200}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
+                    <div className={`absolute inset-0 bg-gradient-to-r ${category.color} opacity-80`}></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-4xl text-white drop-shadow-lg">{category.icon}</span>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg text-[#1F2937] capitalize mb-1">{category.type}</h3>
+                    <p className="text-sm text-[#6B7280]">Interactive exercises</p>
+                    <div className={`mt-3 w-12 h-0.5 ${category.accent.replace('border-', 'bg-')} rounded-full`}></div>
                   </div>
                 </div>
               </Link>
@@ -223,59 +231,104 @@ export default function ChildDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Continue Learning */}
           <motion.div
-            className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg"
+            className="lg:col-span-2 bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] border border-gray-100 rounded-xl shadow-sm"
             variants={itemVariants}
           >
-            <div className="flex items-center gap-3 mb-6">
-              <Image
-                src="https://images.unsplash.com/photo-1472173148041-00294f0814a2?w=40&h=40&fit=crop"
-                alt="Continue learning"
-                width={40}
-                height={40}
-                className="w-10 h-10 rounded-full"
-              />
-              <h2 className="text-xl font-bold text-[#1F2937]">Continue Learning</h2>
+            <div className="border-b border-gray-100 p-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-[#4F46E5] to-[#3B82F6] rounded-lg flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-[#1F2937]">Continue Learning</h2>
+                  <p className="text-sm text-[#6B7280]">Pick up where you left off</p>
+                </div>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {childActivities.slice(0, 4).map(activity => (
-                <ActivityCard
-                  key={activity.id}
-                  id={activity.id}
-                  title={activity.title}
-                  type={activity.type}
-                  difficulty={activity.difficulty}
-                  description={activity.description}
-                  imageUrl={`https://images.unsplash.com/photo-${activity.type === 'phonics' ? '1503676260728-1c00da094a0b' :
-                      activity.type === 'spelling' ? '1455390582262-044cdead277a' :
-                        activity.type === 'reading' ? '1481627834876-b7833e8f5570' :
-                          '1606092195730-5d7b9af1efc5'
-                    }?w=400&h=250&fit=crop`}
-                  completedPercentage={
-                    todayActivities.find(a => a.id === activity.id)?.completed ? 100 :
-                      Math.random() > 0.7 ? Math.floor(Math.random() * 80) : 0
-                  }
-                  isNew={activity.id === 'act-001' || activity.id === 'act-008'}
-                />
-              ))}
-            </div>
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {childActivities.slice(0, 4).map((activity, index) => {
+                  const completedActivity = todayActivities.find(a => a.id === activity.id);
+                  const completedPercentage = completedActivity?.completed ? 100 : Math.random() > 0.7 ? Math.floor(Math.random() * 80) : 0;
 
-            <div className="mt-4 text-center">
-              <Link
-                href="/activities"
-                className="inline-flex items-center px-6 py-3 bg-[#4F46E5] text-white font-medium rounded-xl hover:bg-[#4338CA] transition-colors"
-              >
-                View All Activities
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
+                  return (
+                    <div key={activity.id} className="group">
+                      <div className="bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] hover:from-[#F1F5F9] hover:to-[#E0E7FF] border border-gray-100 hover:border-gray-200 rounded-lg transition-all duration-300 overflow-hidden shadow-sm">
+                        <div className="p-4">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-lg">
+                                {activity.type === 'phonics' ? '🔤' :
+                                  activity.type === 'spelling' ? '✏️' :
+                                    activity.type === 'reading' ? '📚' : '🧩'}
+                              </span>
+                              <div>
+                                <h3 className="font-medium text-[#1F2937] text-sm">{activity.title}</h3>
+                                <p className="text-xs text-[#6B7280] capitalize">{activity.type} • {activity.difficulty}</p>
+                              </div>
+                            </div>
+                            {(activity.id === 'act-001' || activity.id === 'act-008') && (
+                              <span className="bg-[#F59E0B] text-white text-xs px-2 py-1 rounded-full font-medium">
+                                New
+                              </span>
+                            )}
+                          </div>
+
+                          {activity.description && (
+                            <p className="text-xs text-[#6B7280] mb-3 line-clamp-2">{activity.description}</p>
+                          )}
+
+                          {completedPercentage > 0 && (
+                            <div className="mb-3">
+                              <div className="flex justify-between items-center mb-1">
+                                <span className="text-xs text-[#6B7280]">Progress</span>
+                                <span className="text-xs font-medium text-[#1F2937]">{completedPercentage}%</span>
+                              </div>
+                              <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-gradient-to-r from-[#10B981] to-[#14B8A6] rounded-full transition-all duration-300"
+                                  style={{ width: `${completedPercentage}%` }}
+                                />
+                              </div>
+                            </div>
+                          )}
+
+                          <Link
+                            href={`/activities/${activity.id}`}
+                            className="inline-flex items-center justify-center w-full px-3 py-2 text-sm font-medium text-[#4F46E5] hover:text-white hover:bg-[#4F46E5] border border-[#4F46E5] rounded-md transition-all duration-200"
+                          >
+                            {completedPercentage === 100 ? 'Review' : completedPercentage > 0 ? 'Continue' : 'Start'}
+                            <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-gray-100">
+                <Link
+                  href="/activities"
+                  className="inline-flex items-center justify-center w-full px-4 py-2 bg-[#F8FAFC] hover:bg-[#F1F5F9] text-[#4F46E5] font-medium rounded-lg transition-colors border border-gray-200 hover:border-gray-300"
+                >
+                  View All Activities
+                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </motion.div>
 
           {/* Recent Achievements */}
           <motion.div
-            className="bg-white p-6 rounded-2xl shadow-lg"
+            className="bg-gradient-to-br from-[#F8FAFC] to-[#E0E7FF] border border-gray-100 p-6 rounded-2xl shadow-sm"
             variants={itemVariants}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -291,7 +344,7 @@ export default function ChildDashboard() {
 
             <div className="space-y-3">
               {recentBadges.map(badge => (
-                <div key={badge.id} className="flex items-center gap-3 p-3 bg-[#F3F4F6] rounded-xl">
+                <div key={badge.id} className="flex items-center gap-3 p-3 bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] border border-gray-100 rounded-xl shadow-sm">
                   <span className="text-2xl">{badge.icon}</span>
                   <div>
                     <p className="font-medium text-[#1F2937] text-sm">{badge.title}</p>
@@ -327,7 +380,7 @@ export default function ChildDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Learning Streak */}
           <motion.div
-            className="bg-[#10B981] p-6 rounded-2xl shadow-lg text-white"
+            className="bg-gradient-to-br from-[#4F46E5] to-[#6366F1] border border-[#86EFAC] p-6 rounded-2xl shadow-sm text-white"
             variants={itemVariants}
           >
             <div className="flex items-center gap-4">
@@ -348,7 +401,7 @@ export default function ChildDashboard() {
 
           {/* Parent Connection */}
           <motion.div
-            className="bg-white p-6 rounded-2xl shadow-lg border-2 border-[#F3F4F6]"
+            className="bg-gradient-to-br from-[#F8FAFC] to-[#E0E7FF] border border-gray-100 p-6 rounded-2xl shadow-sm"
             variants={itemVariants}
           >
             <div className="flex items-center gap-4">
