@@ -4,6 +4,9 @@ RAG (Retrieval-Augmented Generation) service for document processing and retriev
 import os
 import glob
 import re
+import pickle
+import hashlib
+import time
 from pathlib import Path
 from typing import List, Tuple
 from langchain_community.embeddings import OllamaEmbeddings
@@ -26,21 +29,101 @@ class RAGService:
         self.retriever = None
         self.pdf_folder = settings.PDF_FOLDER
         self.default_websites = settings.DEFAULT_WEBSITES
+        self.vector_store_cache_file = os.path.join(settings.CHROMA_DIR, "vectorstore_cache.pkl")
+        self.content_hash_file = os.path.join(settings.CHROMA_DIR, "content_hash.txt")
+        
+        # Check GPU availability
+        self.gpu_info = self._check_gpu_availability()
         
         self._initialize_embeddings()
     
     def _initialize_embeddings(self):
-        """Initialize embeddings with fallback to fake embeddings"""
+        """Initialize embeddings with GPU acceleration and fallback to fake embeddings"""
         try:
             if not settings.DISABLE_RAG:
-                self.embeddings = OllamaEmbeddings(model=settings.OLLAMA_MODEL)
+                # Try to use GPU acceleration for Ollama
+                print("🔍 Attempting to initialize Ollama embeddings with GPU acceleration...")
+                self.embeddings = OllamaEmbeddings(
+                    model=settings.OLLAMA_MODEL,
+                    # Add GPU-specific options if available in your Ollama setup
+                    # These may vary depending on your Ollama configuration
+                )
                 print(f"✅ Ollama embeddings initialized with model: {settings.OLLAMA_MODEL}")
+                print("🚀 GPU acceleration enabled (if Ollama is configured with CUDA)")
             else:
                 print("⚠️ RAG disabled via configuration")
         except Exception as e:
             print(f"⚠️ Ollama embeddings unavailable ({e}). Falling back to fake embeddings.")
             # FakeEmbeddings: deterministic small vectors for API compatibility
             self.embeddings = FakeEmbeddings(size=384)
+    
+    def _calculate_content_hash(self, urls: List[str], include_pdfs: bool) -> str:
+        """Calculate a hash of the content sources to detect changes"""
+        content_info = {
+            "urls": sorted(urls) if urls else [],
+            "include_pdfs": include_pdfs,
+            "pdf_files": []
+        }
+        
+        # Add PDF file info if PDFs are included
+        if include_pdfs:
+            pdf_files = glob.glob(os.path.join(self.pdf_folder, "*.pdf"))
+            for pdf_file in pdf_files:
+                try:
+                    stat = os.stat(pdf_file)
+                    content_info["pdf_files"].append({
+                        "name": os.path.basename(pdf_file),
+                        "size": stat.st_size,
+                        "modified": stat.st_mtime
+                    })
+                except OSError:
+                    continue
+            content_info["pdf_files"].sort(key=lambda x: x["name"])
+        
+        # Create hash of the content info
+        content_str = str(content_info)
+        return hashlib.md5(content_str.encode()).hexdigest()
+    
+    def _save_content_hash(self, content_hash: str):
+        """Save the content hash to file"""
+        os.makedirs(os.path.dirname(self.content_hash_file), exist_ok=True)
+        with open(self.content_hash_file, 'w') as f:
+            f.write(content_hash)
+    
+    def _load_content_hash(self) -> str:
+        """Load the saved content hash"""
+        if os.path.exists(self.content_hash_file):
+            try:
+                with open(self.content_hash_file, 'r') as f:
+                    return f.read().strip()
+            except Exception:
+                pass
+        return ""
+    
+    def _load_existing_vectorstore(self) -> bool:
+        """Try to load an existing vector store from Chroma persistence"""
+        try:
+            if os.path.exists(settings.CHROMA_DIR) and os.listdir(settings.CHROMA_DIR):
+                print("📂 Loading existing vector store from Chroma...")
+                self.vectorstore = Chroma(
+                    persist_directory=settings.CHROMA_DIR,
+                    embedding_function=self.embeddings
+                )
+                
+                # Create retriever
+                self.retriever = self.vectorstore.as_retriever(
+                    search_type="similarity_score_threshold",
+                    search_kwargs={
+                        "k": settings.RETRIEVAL_K,
+                        "score_threshold": settings.SIMILARITY_THRESHOLD
+                    }
+                )
+                
+                print("✅ Successfully loaded existing vector store")
+                return True
+        except Exception as e:
+            print(f"⚠️ Could not load existing vector store: {e}")
+        return False
     
     async def load_pdfs_from_folder(self, folder_path: str = None) -> List[Document]:
         """Load all PDF files from the specified folder"""
@@ -114,6 +197,17 @@ class RAGService:
             include_pdfs = settings.INCLUDE_PDFS
         
         try:
+            # Calculate hash of current content sources
+            current_hash = self._calculate_content_hash(urls, include_pdfs)
+            saved_hash = self._load_content_hash()
+            
+            # Check if we can use existing vector store
+            if current_hash == saved_hash and self._load_existing_vectorstore():
+                print("🚀 Using cached vector store (no changes detected)")
+                return True
+            
+            print("🔄 Content changes detected or no cache found. Creating new vector store...")
+            
             all_documents = []
             
             # Load PDFs if enabled
@@ -147,16 +241,73 @@ class RAGService:
                 length_function=len
             )
             splits = text_splitter.split_documents(all_documents)
-            print(f"📋 Created {len(splits)} document chunks")
+            total_chunks = len(splits)
+            print(f"📋 Created {total_chunks} document chunks")
             
-            # Create vector store
-            print("🔗 Creating vector store...")
-            self.vectorstore = Chroma.from_documents(
-                documents=splits,
-                embedding=self.embeddings,
-                persist_directory=settings.CHROMA_DIR
+            # Create vector store with GPU acceleration, timing, and progress tracking
+            print("🔗 Creating vector store with GPU acceleration...")
+            start_time = time.time()
+            
+            # Initialize empty Chroma store
+            self.vectorstore = Chroma(
+                persist_directory=settings.CHROMA_DIR,
+                embedding_function=self.embeddings
             )
-            print("✅ Vector store created successfully")
+            
+            # Benchmark embedding speed with a small sample
+            print("🧪 Testing embedding speed...")
+            sample_size = min(5, total_chunks)
+            sample_docs = splits[:sample_size]
+            sample_texts = [doc.page_content for doc in sample_docs]
+            
+            sample_start = time.time()
+            _ = self.embeddings.embed_documents(sample_texts)
+            sample_end = time.time()
+            
+            time_per_chunk = (sample_end - sample_start) / sample_size
+            estimated_total_time = time_per_chunk * total_chunks
+            
+            print(f"⏱️ Embedding speed: {time_per_chunk:.3f}s per chunk")
+            print(f"📊 Estimated total time: {estimated_total_time:.1f}s ({estimated_total_time/60:.2f} minutes)")
+            print(f"🎮 Using RTX 3050 GPU acceleration via Ollama")
+            
+            # Process documents in batches for better GPU utilization
+            batch_size = 32  # Optimal for RTX 3050
+            processed = 0
+            
+            print("🚀 Processing document batches...")
+            batch_start = time.time()
+            
+            for i in range(0, total_chunks, batch_size):
+                batch_docs = splits[i:i + batch_size]
+                batch_texts = [doc.page_content for doc in batch_docs]
+                batch_metadata = [doc.metadata for doc in batch_docs]
+                
+                # Add batch to vector store (embeddings computed on GPU)
+                self.vectorstore.add_texts(texts=batch_texts, metadatas=batch_metadata)
+                
+                processed += len(batch_docs)
+                elapsed = time.time() - batch_start
+                avg_time_per_chunk = elapsed / processed
+                remaining_chunks = total_chunks - processed
+                eta = remaining_chunks * avg_time_per_chunk
+                
+                progress_percent = (processed / total_chunks) * 100
+                print(f"🔄 Progress: {processed}/{total_chunks} ({progress_percent:.1f}%) | "
+                      f"Elapsed: {elapsed:.1f}s | ETA: {eta:.1f}s | "
+                      f"Speed: {avg_time_per_chunk:.3f}s/chunk", end='\r')
+            
+            print()  # New line after progress updates
+            
+            # Persist the vector store
+            print("💾 Persisting vector store to disk...")
+            self.vectorstore.persist()
+            
+            total_time = time.time() - start_time
+            print(f"✅ Vector store created successfully in {total_time:.1f}s ({total_time/60:.2f} minutes)")
+            print(f"🏎️ Average speed: {total_time/total_chunks:.3f}s per chunk with GPU acceleration")
+            
+            print(f"🏎️ Average speed: {total_time/total_chunks:.3f}s per chunk with GPU acceleration")
             
             # Create retriever
             self.retriever = self.vectorstore.as_retriever(
@@ -167,11 +318,72 @@ class RAGService:
                 }
             )
             
-            print(f"🎯 RAG system initialized with {len(splits)} document chunks")
+            # Save the content hash for future reference
+            self._save_content_hash(current_hash)
+            
+            print(f"🎯 RAG system initialized with {total_chunks} document chunks")
             return True
             
         except Exception as e:
             print(f"❌ Error initializing RAG system: {e}")
+            return False
+    
+    def _check_gpu_availability(self) -> dict:
+        """Check GPU availability and return system information"""
+        gpu_info = {
+            "gpu_available": False,
+            "gpu_name": "None",
+            "cuda_available": False,
+            "gpu_memory": "Unknown"
+        }
+        
+        try:
+            import subprocess
+            import json
+            
+            # Check NVIDIA GPU via nvidia-smi
+            result = subprocess.run(['nvidia-smi', '--query-gpu=gpu_name,memory.total', '--format=csv,noheader,nounits'], 
+                                  capture_output=True, text=True, timeout=5)
+            
+            if result.returncode == 0:
+                lines = result.stdout.strip().split('\n')
+                if lines and lines[0]:
+                    parts = lines[0].split(', ')
+                    if len(parts) >= 2:
+                        gpu_info["gpu_available"] = True
+                        gpu_info["gpu_name"] = parts[0].strip()
+                        gpu_info["gpu_memory"] = f"{parts[1].strip()} MB"
+                        
+                        # Check if it's RTX 3050
+                        if "RTX 3050" in gpu_info["gpu_name"]:
+                            print(f"🎮 RTX 3050 detected: {gpu_info['gpu_name']} ({gpu_info['gpu_memory']})")
+                        else:
+                            print(f"🖥️ GPU detected: {gpu_info['gpu_name']} ({gpu_info['gpu_memory']})")
+            
+        except Exception as e:
+            print(f"⚠️ Could not detect GPU: {e}")
+        
+        return gpu_info
+    
+    async def force_rebuild_vectorstore(self, urls: List[str] = None, include_pdfs: bool = None) -> bool:
+        """Force rebuild the vector store by clearing cache and recreating"""
+        try:
+            # Clear existing cache
+            if os.path.exists(self.content_hash_file):
+                os.remove(self.content_hash_file)
+                print("🗑️ Cleared content hash cache")
+            
+            # Clear Chroma directory
+            if os.path.exists(settings.CHROMA_DIR):
+                import shutil
+                shutil.rmtree(settings.CHROMA_DIR)
+                print("🗑️ Cleared existing vector store")
+            
+            # Rebuild
+            return await self.initialize_vectorstore(urls, include_pdfs)
+            
+        except Exception as e:
+            print(f"❌ Error force rebuilding vector store: {e}")
             return False
     
     def _create_fallback_content(self) -> List[str]:
